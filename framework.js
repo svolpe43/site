@@ -1,5 +1,5 @@
 
-/* The Game of Life */
+/* Astar visualization and map editor */
 
 var boardDimWithoutLines = 600;
 var lineWidth = 1;
@@ -29,6 +29,7 @@ var openList = [];
 var closedList = [];
 var current;
 
+// start executing some code
 $(document).ready(function(){
 	canvas = document.getElementById("discanvas");
 
@@ -40,6 +41,7 @@ $(document).ready(function(){
 	initBoard();
 });
 
+// initiaalize the board 2d array
 Array.matrix = function(numrows, numcols){
    var arr = [];
    for (var i = 0; i < numrows; ++i){
@@ -54,6 +56,7 @@ Array.matrix = function(numrows, numcols){
 
 /* GUI input */
 
+// start the interval
 function startnow(){
 	if(!running){
 		console.log("Starting...");
@@ -62,6 +65,7 @@ function startnow(){
 	}
 }
 
+// stop the interval
 function stop(){
 	if(running){
 		console.log("Stopping...");
@@ -70,6 +74,7 @@ function stop(){
 	}
 }
 
+// reset the board to random wall placement
 function setRandom(){
 	stop();
 	randomize();
@@ -77,6 +82,7 @@ function setRandom(){
 	draw();
 }
 
+// update the size of the board
 function updateNow(){
 	stop();
 	updateSettingsFromUI();
@@ -84,12 +90,14 @@ function updateNow(){
 	draw();
 }
 
+// completely clear the board
 function reset(){
 	stop();
 	clear();
 	draw();
 }
 
+// update the delta in UI
 function showDeltaNow(val){
 	delta = - Number(val);
 	console.log(delta);
@@ -98,6 +106,7 @@ function showDeltaNow(val){
 	$('#deltaval').text(-val + " ms");
 }
 
+// update the randomizing density in UI
 function showDensityNow(val){
 	density = Number(val);
 	$('#densityval').text(val + "%");
@@ -105,6 +114,7 @@ function showDensityNow(val){
 
 /* interal use */
 
+// initialize the board
 function initBoard(){
 	updateSettingsFromUI();
 	board = Array.matrix(DIM, DIM);
@@ -113,6 +123,7 @@ function initBoard(){
 	draw();
 }
 
+// update settings using values from the UI
 function updateSettingsFromUI(){
 	delta = - Number($("#delta").val());
 	cellDim = Number($("#dim").val());
@@ -120,11 +131,7 @@ function updateSettingsFromUI(){
 	updateSettings();
 }
 
-function updateSettingsFromPattern(dim){
-	cellDim = dim;
-	updateSettings();
-}
-
+// update all the settings once they are retrieved
 function updateSettings(){
 	lineWidth = (cellDim < 15) ? 0 : 1;
 
@@ -189,10 +196,12 @@ function setStopPosition(x, y){
 	board[x][y].isWall = false;
 }
 
+// remake the entire board
 function clear(){
 	board = Array.matrix(DIM, DIM);
 }
 
+// fired when canvas is clicked down
 function mouseDown(event){
 	console.log("mouse down");
 
@@ -213,10 +222,10 @@ function mouseDown(event){
 	}
 
 	draw();
-	
 	canvas.onmousemove = mouseMove;
 }
 
+// fired when mouse moves on canvas
 function mouseMove(event){
 	console.log("mouse move");
 
@@ -237,27 +246,32 @@ function mouseMove(event){
 	}
 }
 
+// fired when mouse unclicks on canvas
 function mouseUp(event){
 	console.log("mouse up");
 	canvas.onmousemove = null;
 }
 
+// grabs the coordinates on the canvas of the event
 function getCord(eventN, isX){
 	return canvasN = (isX) ? 
 		eventN - canvas.offsetLeft + $(document).scrollLeft() :
 		eventN - canvas.offsetTop + $(document).scrollTop();
 }
 
+// function to call on the interval
 function step(){
-	updateBoard();
+	iterateAstar();
 	draw();
 }
 
+// draws the board on canvas
 function draw(){
 	drawLines();
 	drawCells();
 }
 
+// draws lines
 function drawLines(){
 	context.fillStyle="#000000";
 	var offset = cellDim + lineWidth;
@@ -286,6 +300,7 @@ function drawLines(){
 	}
 }
 
+// draws the current state of board on canvas
 function drawCells(){
 	context.fillStyle="#9966ff";
 	var offset = cellDim + lineWidth;
@@ -321,9 +336,5 @@ function drawCells(){
 		y += offset;
 		x = 0;
 	}
-}
-
-function updateBoard(){
-	iterateAstar();
 }
 

@@ -1,11 +1,13 @@
 
 /*
- * Tile object to represent a space on the board
+ * Astar Algorithm
  */
 
+// tracer is for the path tracer once at target
 var tracer;
 var targetFound = false;
 
+// the tile for each space on the board
 function Tile(x, y){
 	
 	// set the location
@@ -27,35 +29,32 @@ function Tile(x, y){
 
 	this.onOpenList = false;
 	this.onClosedList = false;
-
-	this.canGoUp = true;
-	this.canGoDown = true;
-	this.canGoRight = true;
-	this.canGoLeft = true;
 }
 
+// updates all the hueristics for the tile given
 function updateHueristics(tile){
 	tile.g = distance(start, tile);
 	tile.h = distance(tile, target);
 	tile.f = tile.g + tile.h;
 }
 
+// Tile compare function to pass to sorting
 function compare(a, b){
 	return a.f - b.f;
 }
 
+// get the Manhattan distance between two tiles
 function distance(from, to){
 	return Math.abs(from.x - to.x) + Math.abs(from.y - to.y);
 }
 
-/*
- * Astar object to handle all the 
- */
-
+// initialize the astar parameters
 function initAstar(){
 	openList = [];
+	closedList =[];
 	openList.push(start);
 	board[start.x][start.y].isOnOpenList = true;
+	targetFound = false;
 }
 
 function iterateAstar(){
@@ -105,6 +104,7 @@ function iterateAstar(){
 				if(!contains(openList, n)){
 					openList.push(n);
 					board[n.x][n.y].isOnOpenList = true;
+					board[n.x][n.y].isOnClosedList = false;
 					board[n.x][n.y].parent = current;
 					updateHueristics(n);
 				// if we need to update tile
@@ -149,28 +149,3 @@ function contains(haystack, needle){
 	}
 	return false;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
