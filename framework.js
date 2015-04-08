@@ -28,6 +28,7 @@ var target;
 var openList = [];
 var closedList = [];
 var current;
+var allowDiagonals = false;
 
 // start executing some code
 $(document).ready(function(){
@@ -38,6 +39,11 @@ $(document).ready(function(){
 
 	context = canvas.getContext("2d");
 	context.lineWidth = lineWidth;
+
+	$('#diagonal-switch').change(function () {
+		allowDiagonals = (allowDiagonals) ? false : true;
+	});
+
 	initBoard();
 });
 

@@ -32,8 +32,8 @@ function Tile(x, y){
 }
 
 // updates all the hueristics for the tile given
-function updateHueristics(tile){
-	tile.g = distance(start, tile);
+function updateHueristics(tile, ng){
+	tile.g = ng; //distance(start, tile);
 	tile.h = distance(tile, target);
 	tile.f = tile.g + tile.h;
 }
@@ -52,6 +52,7 @@ function distance(from, to){
 function initAstar(){
 	openList = [];
 	closedList =[];
+	start.f = start.g = 0;
 	openList.push(start);
 	board[start.x][start.y].isOnOpenList = true;
 	targetFound = false;
@@ -85,8 +86,14 @@ function iterateAstar(){
 			for(var j = -1; j < 2; j++){
 	
 				// skip the current and corner tiles
-				if((i == 0 && j == 0) || (i != 0 && j != 0))
+				if(i == 0 && j == 0)
 					continue;
+
+				if(!allowDiagonals){
+					if(i != 0 && j != 0){
+						continue;
+					}	
+				}
 				
 				// make sure we're not out of bounds
 				if(outOfBounds(current.x + i, current.y + j))
@@ -99,18 +106,18 @@ function iterateAstar(){
 				if(contains(closedList, n) || n.isWall){
 					continue;
 				}
+				
+				if(!contains(openList, n) || current.g + 1 < n.g){
+					// set parent and update
+					board[n.x][n.y].parent = current;
+					updateHueristics(n, current.g + 1);
 
-				// add it to the openList if not already and update tile
-				if(!contains(openList, n)){
-					openList.push(n);
-					board[n.x][n.y].isOnOpenList = true;
-					board[n.x][n.y].isOnClosedList = false;
-					board[n.x][n.y].parent = current;
-					updateHueristics(n);
-				// if we need to update tile
-				}else if(tentativeG(current, n) < n.g){
-					board[n.x][n.y].parent = current;
-					updateHueristics(n);
+					if(!n.isOnOpenList){
+						// move it to the open list
+						openList.push(n);
+						board[n.x][n.y].isOnOpenList = true;
+						board[n.x][n.y].isOnClosedList = false;
+					}
 				}
 			}
 		}
