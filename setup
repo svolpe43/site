@@ -1,0 +1,29 @@
+#!/bin/bash
+
+#apache
+sudo apt-get install python3-pip apache2 libapache2-mod-wsgi-py3
+sudo /etc/init.d/apache2 restart
+
+#000-default.conf
+<VirtualHost *>
+    ServerName shawnvolpe.com
+
+    WSGIDaemonProcess site user=www-data group=www-data processes=1 threads=5
+    WSGIScriptAlias / /var/www/site/adapter.wsgi
+
+    <Directory /var/www/site>
+        WSGIProcessGroup site
+        WSGIApplicationGroup %{GLOBAL}
+        Order deny,allow
+        Allow from all
+    </Directory>
+</VirtualHost>
+
+# move files to the right place
+rsync -avz ./ ubuntu@184.72.93.196:/home/ubuntu/site/
+sudo rm -rf /var/www/site/*
+sudo cp -r /home/ubuntu/site/* /var/www/site/
+# remove the run from main.py
+
+# set permissions
+sudo chown -R www-data:www-data /var/www/site

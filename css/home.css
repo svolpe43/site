@@ -1,0 +1,55 @@
+
+html body{
+	background-image: url("woods.jpg");
+	background-size: 100%;
+}
+
+#top{
+	overflow: hidden;
+	margin: 20px 0;
+}
+
+#github-link {
+	overflow: hidden;
+	display: inline-block;
+	line-height: 56px;
+}
+
+#container{
+	width: 90%;
+	margin: 0 auto;
+}
+
+#wrapper {
+	overflow: hidden;
+}
+
+ul {
+	padding: 0;
+}
+
+li {
+	list-style-type: none;
+	text-decoration: none !important;
+}
+
+h3, a{
+	color: #a50932 !important;
+	font-size: 16px;
+	float: left;
+	margin-right: 10px;
+	overflow: hidden;
+}
+
+a:hover, li:hover{
+	color: #205fa3 !important;
+}
+
+p{
+	line-height: 25px;
+	color: #000;
+	font-size: 15px;
+	overflow: hidden;
+	display: inline-block;
+}
+

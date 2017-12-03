@@ -1,0 +1,126 @@
+
+#wrapper{
+	width: 60%;
+	overflow: hidden;
+	margin: 0 auto;
+	font-size: 17px;
+	margin-bottom: 150px;
+	margin-top: 50px;
+}
+
+#wrapper h2 {
+	font-size: 40px;
+}
+
+#title{
+	margin-top: 40px;
+	margin-bottom: 20px;
+	width: 100%;
+	overflow: hidden;
+}
+
+#title img {
+	margin: 5px;
+	float: right;
+}
+
+#title h2{
+	float: left;
+	overflow: hidden;
+	margin: 0;
+}
+
+#title h3 {
+	float: left;
+}
+
+#title h4 {
+	margin: 0;
+}
+
+#title #cfsh-logo{
+	float: left;
+	overflow: hidden;
+	margin: 0;
+	color: #bf2839;
+}
+
+#blog {
+	overflow: hidden;
+	margin: 0 auto;
+	text-align: justify;
+}
+
+.no-indent p{
+	text-indent: 0 !important;
+}
+
+#blog img{
+	display: block;
+	overflow: hidden;
+	margin: 0 auto;
+	padding: 15px 0;
+}
+
+#blog p {
+	text-indent: 50px;
+	margin: 20px 0;
+}
+
+#blog h3 {
+	margin-top: 40px;
+	margin-bottom: 10px;
+}
+
+.gallery h3{
+	display: inline-block;
+	float: left;
+}
+
+.gallery p {
+	clear: left;
+	margin: 0;
+}
+
+#examples h4{
+	overflow: hidden;
+	text-align: center;
+	margin: 20px 0;
+}
+
+#map, #route-map, #city-map {
+	height: 500px;
+	display: none;
+}
+
+#progress-wrapper{
+	padding: 240px 0;
+}
+
+#progress-wrapper p {
+	margin: 0 auto;
+	text-align: center;
+}
+
+#progress-container{
+	height: 20px;
+	background-color: #3da56a;
+	border-radius: 4px;
+}
+
+#progress {
+	width: 0px;
+	height: 20px;
+	background-color: #1f5637;
+	border-radius: 4px;
+}
+
+#blog ul {
+	margin: 30px 0;
+	padding: 0;
+}
+
+#blog li {
+	list-style-type: none;
+}
+	

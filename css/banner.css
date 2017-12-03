@@ -1,0 +1,37 @@
+
+#banner-container {
+	position:fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 50px;
+	background-color: #000;
+	z-index: 1000;
+}
+
+#banner {
+	width: 60%;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+#banner a{
+	text-decoration: none;
+	margin: 0 10px;
+	color: #9b182c;
+}
+
+#banner a:hover{
+	color: #4470b5;
+}
+
+#banner h4 {
+	display: inline-block;
+	margin: 15px 0;
+}
+
+#banner nav{
+	float: right;
+	margin: 15px 0;
+	color: #fff;
+}

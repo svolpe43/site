@@ -1,0 +1,121 @@
+$indent: 30px;
+$done-color: #cce0e0;
+$selected-color: #006666;
+$underline-color: #cc0066;
+
+#top{
+
+	padding-top: 30px;
+
+	h2{
+		float: left;
+		margin: 0;
+	}
+
+	#message{
+		border-radius: 5px;
+		float: right;
+	}
+}
+
+#hotkeys{
+	position: fixed;
+	right: 80px;
+	top: 80px;
+	color: #666666;
+	z-index: 1000;
+	width: 20%;
+
+	h4{
+		margin: 0;
+		padding: 0;
+	}
+
+	ul{
+		padding: 0;
+		margin-top: 10px;
+	}
+
+	li{
+		list-style: none;
+		overflow: hidden;
+	}
+
+	.key{
+		float: left;
+	}
+
+	.action{
+		float: right;
+	}
+}
+
+#container{
+	width: 60%;
+	float: left;
+	margin-left: 10%;
+}
+
+#note{
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+	border-left-style: solid;
+	border-width: 1px;
+	padding-left: 5px;
+
+	input{
+		width: 100%;
+		overflow: hidden;
+		resize: none;
+		display: block;
+		border: none;
+		position: relative;
+		margin-top: 1px;
+		line-height: 20px !important;
+		padding: 0 !important;
+		margin: 1px 0 0 0 !important;
+	}
+
+	input:focus{
+		outline: none !important;
+		border: none;
+		border-bottom-style: solid;
+		border-color: $underline-color;
+		border-width: 1px;
+	}
+
+	@mixin line($depth){
+		left: $indent * $depth;
+		font-size: 10px + (7 - $depth/2) !important;
+	}
+
+	.indent-0{@include line(0);}
+	.indent-1{@include line(1);}
+	.indent-2{@include line(2);}
+	.indent-3{@include line(3);}
+	.indent-4{@include line(4);}
+	.indent-5{@include line(5);}
+	.indent-6{@include line(6);}
+	.indent-7{@include line(7);}
+	.indent-8{@include line(8);}
+	.indent-9{@include line(9);}
+	.indent-10{@include line(10);}
+	.indent-11{@include line(11);}
+	.indent-12{@include line(12);}
+	.indent-13{@include line(13);}
+	.indent-14{@include line(14);}
+	.indent-15{@include line(15);}
+
+	.done{
+		background-color: $done-color;
+	}
+	.selected{
+		background-color: $selected-color;
+		color: #fff;
+	}
+}
+
+p{
+	display: inline-block;
+}

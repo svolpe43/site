@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" type="image/ico" href="favicon.png" />
+    <link href="blog.css" rel="stylesheet"/>
+    <link href="banner.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  </head>
+  <body>
+	<div id="banner-container">
+      <div id="banner">
+        <a href="http://shawnvolpe.com"><h4>Shawn Volpe</h4></a>
+        <nav>
+          <a href="/limbo">Limbo</a>
+          <a href="/spaceform">Spaceform</a>
+          <a href="/planets">Planets</a>
+          <a href="/cfsh">Cfsh</a>
+          <a href="/deltav">DeltaV</a>
+          <a href="/astar">A*</a>
+          <a href="/arc">Arc</a>
+          <a href="/gol">Game of Life</a>
+          <a href="/ms">Mine Sweeper</a>
+        </nav>
+      </div>
+    </div>
+  	<div id="wrapper">
+	  	<div id="title">
+			<h2 id="cfsh-logo">#:</h2><h2>Cfsh</h2>
+			<a href="https://www.npmjs.com/package/cfsh"><img src="npm.png" height="40px" alt="npm-link"/></a>
+			<a id="github-link" href="https://github.com/svolpe43"><img src="github.png" alt="Github link" height="40px"/></a>
+			<br><br><h4>Node.js, AWS</h4>
+		</div>
+	    <div id="blog">
+	    	<p>
+	    	While using AWS, especially CloudFormation, heavily, I realized how powerful the platform really is. AWS's API based nature allows the ecosystem of products to thrive and allowed for products like CloudFormation to exist. I could create hundreds of organized AWS components in minutes by running a json file in the cloud. But as there were more and more stuff, problems arose. How the hell are you supposed keep track of all them? The AWS console is to fragmented to be switching between 10 different dashboards.
+	    	</p>
+	    	<p>
+	    	Cfsh is a shell that mimics the Bash terminal and allows you to traverse AWS components just like you would directories in a file system with "cd" and "ls". It is built using Node.js and the AWS API. There are over 30 built-in commands that allow you to traverse, interact and monitor AWS components. Using this tool should be natural to any developer that is familiar with a Linux terminal. This tool has mostly replaced the AWS console from my workflow.
+	    	</p>
+	    	<div id="examples">
+	    		<h4>'cd' and 'ls' to different AWS resources.</h4>
+		    	<img src="cfsh/img/resource_stuff.gif" width="80%" alt="npm-link"/>
+	    		<h4>'ssh' into instances.</h4>
+	    		<img src="cfsh/img/misc_res_stuff.gif" width="80%" alt="npm-link"/>
+		    	<h4>'rm' and 'mk' Cloudformation stacks.</h4>
+		    	<img src="cfsh/img/stack_ops.gif" width="80%" alt="npm-link"/>
+		    	<h4>Get info from AWS resources.</h4>
+		    	<img src="cfsh/img/stack_stuff.gif" width="80%" alt="npm-link"/>
+		    	<h4>Cfsh comes with over 30 commands</h4>
+		    	<table class="table">
+					<tr>
+						<td><strong>mk, rm</strong></td>
+						<td>Remove or delete stacks.</td>
+					</tr>
+					<tr>
+						<td><strong>cat</strong></td>
+						<td>Cat a file on an instance.</td>
+					</tr>
+					<tr>
+						<td><strong>ls</strong></td>
+						<td>List AWS resources.</td>
+					</tr>
+					<tr>
+						<td><strong>stats</strong></td>
+						<td>Inspect the CPU and memory usage of an instance.</td>
+					</tr>
+					<tr>
+						<td><strong>vols</strong></td>
+						<td>List all the volumes that are attached to the instances in an ASG.</td>
+					</tr>
+					<tr>
+						<td><strong>ssh</strong></td>
+						<td>Start ssh sessions to an instance.</td>
+					</tr>
+					<tr>
+						<td><strong>sshall</strong></td>
+						<td>Ssh into all the instances in the ASG.</td>
+					</tr>
+					<tr>
+						<td><strong>sshrand</strong></td>
+						<td>Ssh into a random instances in the ASG.</td>
+					</tr>
+				</table>
+				<h4>And many more.</h4>
+	    	</div>
+	    </div>
+	</div>
+  </body>
+</html>
