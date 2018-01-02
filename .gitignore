@@ -1,2 +1,4 @@
 *.pyc
 .sass-cache
+*.jpg
+*.png

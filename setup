@@ -27,3 +27,11 @@ sudo cp -r /home/ubuntu/site/* /var/www/site/
 
 # set permissions
 sudo chown -R www-data:www-data /var/www/site
+
+# setup ssl
+# install certbot first, google those commands
+# then comment out the WSGI daemon process
+# run the following command
+sudo certbot --apache
+# uncomment WSGI daemon process in both secure and non secure configs 
+
