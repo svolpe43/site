@@ -21,6 +21,7 @@ const file_name = "arc.txt";
 // some error responses
 const corrupt_error = "Your 'arc.txt' file in Google Drive is corrupt. Delete it or rename it to continue";
 const multiple_error = "There are more than one 'arc.txt' files in Google Drive! Arc needs to use that name. Delete or rename them to continue.";
+const api_error = "This app has encountered an error retrieving the note from Google Drive."
 
 var authed = false;
 var file = null;
@@ -64,43 +65,50 @@ function request_grive_file(){
 	// had to put populate() inside every catch instead of the end
 	// if it was at the end it would get there before the file was fully downloaded
   	request.execute(function(response){
-  		// we found one 'arc.txt' file
-  		if(response.items.length == 1){
-  			// catch corrupt json
-  			try{
-  				// set the file now cause we don't have scope onces its parcable
-  				file = response.items[0];
-  				download_file(response.items[0], function(response){
-  					// catching undefined response error
-  					if(typeof response === 'undefined'){
-  						alert("Trouble downloading the Google Drive file.")
-  						page = example_page;
-  						file = null;
-  						populate()
-  					}else{
-  						page = JSON.parse(response);
-  						populate();
-  						setInterval(save_grive_file, SAVE_INTERVAL);
-  					}
-  				});
-  			}catch(e){
-  				// if we failed to parse
-  				alert(corrupt_error);
-  				page = [new Liner("", 0)];
-  				populate();
-  			}
-  		// more then one 'arc.txt' file found
-  		}else if(response.items.length > 1){
-  			alert(multiple_error);
+
+		if(response.items){
+			// we found one 'arc.txt' file
+			if(response.items.length == 1){
+				// catch corrupt json
+				try{
+					// set the file now cause we don't have scope onces its parcable
+					file = response.items[0];
+					download_file(response.items[0], function(response){
+						// catching undefined response error
+						if(typeof response === 'undefined'){
+							alert("Trouble downloading the Google Drive file.")
+							page = example_page;
+							file = null;
+							populate();
+						}else{
+							page = JSON.parse(response);
+							populate();
+							setInterval(save_grive_file, SAVE_INTERVAL);
+						}
+					});
+				}catch(e){
+					// if we failed to parse
+					alert(corrupt_error);
+					page = [new Liner("", 0)];
+					populate();
+				}
+			// more then one 'arc.txt' file found
+			}else if(response.items.length > 1){
+				alert(multiple_error);
+				page = example_page;
+				populate();
+			}else{
+				// create the file and initiate a blank page
+				console.log("not found")
+				add_grive_file();
+				page = example_page;
+				populate();
+			}
+		}else{
+			alert(api_error);
   			page = example_page;
   			populate();
-		}else{
-			// create the file and initiate a blank page
-			console.log("not found")
-			add_grive_file();
-			page = example_page;
-			populate();
-		}	
+		}
   	});
 }
 

@@ -16,6 +16,19 @@ $underline-color: #cc0066;
 		border-radius: 5px;
 		float: right;
 	}
+
+	#start{
+		text-align: center;
+
+		h4{
+			width: 80px;
+			border-radius: 5px;
+			background: #2fbc75;
+			padding: 10px 10px;
+			margin: 0 auto;
+			display: block;
+		}
+	}
 }
 
 #hotkeys{
@@ -54,6 +67,7 @@ $underline-color: #cc0066;
 	width: 60%;
 	float: left;
 	margin-left: 10%;
+	margin-top: 50px;
 }
 
 #note{

@@ -91,8 +91,8 @@ function user_input(e){
 	        	e.preventDefault();
 	        	insertTime();
 	        	break;
-	        // q - collapses the node
-	        case 81:
+	        // c - collapses the node
+	        case 67:
 	        	e.preventDefault();
 	        	toggleCollapse(getFocusId());
 	        	break;

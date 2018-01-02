@@ -9,11 +9,17 @@ var page;
 var focus;
 var history;
 
-// wait for window so the auth doesn't fail
 $(window).load(function(){
-	checkAuth();
-	init();
+	add_hotkey_html();
 })
+
+// wait for window so the google auth doesn't fail
+function start(){
+	if(jQuery.isReady){
+	    checkAuth();
+		init();
+	}
+}
 
 function Liner(text, depth){
 	this.stuff = text;
@@ -29,8 +35,7 @@ function init(){
 	$(document).on("keyup", select_key_up);
 	$(document).on("mousemove", mouse_move);
 	message_div = $("#message");
-
-	add_hotkey_html();
+	$("#start").hide();
 
 	setInterval(setSaveText, 1000 * 5);	// every 5 seconds
 }
