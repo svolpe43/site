@@ -1,10 +1,10 @@
 % if section == 'head':
 
 	<title>Game of Life</title>
-	<script src="/gol/jquery.cookie.js"></script>
-	<script src="/gol/life.js"></script>
-	<script src="/gol/patmake.js"></script>
-	<link href="/gol/life.css" rel="stylesheet"/>
+	<script src="/projects/gol/jquery.cookie.js"></script>
+	<script src="/projects/gol/life.js"></script>
+	<script src="/projects/gol/patmake.js"></script>
+	<link href="/projects/gol/life.css" rel="stylesheet"/>
 
 % elif section == 'content':
 	<div id="title">

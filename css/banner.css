@@ -46,4 +46,5 @@
 
 #wrapper{
 	overflow: hidden;
+	min-height: 500px;
 }

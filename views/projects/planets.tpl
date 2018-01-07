@@ -1,9 +1,9 @@
 % if section == 'head':
 
 	<title>Planets API</title>
-	<script src="/space_data.js"></script>
-	<script src="/planets.js"></script>
-	<link href="/planets.css" rel="stylesheet"/>
+	<script src="/projects/space_data.js"></script>
+	<script src="/projects/planets/planets.js"></script>
+	<link href="/projects/planets/planets.css" rel="stylesheet"/>
 
 % elif section == 'content':
 	<div id="canvas-div">

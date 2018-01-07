@@ -6,7 +6,7 @@
             <a class="logo" href="https://www.linkedin.com/in/shawnvolpe/"><img src="/linkedin-solid.png" alt="LinkedIn link" height="40" width="40"></a>
         </div>
 
-        <div class="footer-section border">
+        <div class="footer-section hover border">
             <ul>
                 <li><a href="/limbo">Limbo</a></li>
                 <li><a href="/picman">Picman</a></li>
@@ -15,7 +15,7 @@
             </ul>
         </div>
 
-        <div class="footer-section">
+        <div class="footer-section hover">
             <ul>
                 <li><a href="/projects/astar">Astar</a></li>
                 <li><a href="/projects/spaceform">SpaceForm</a></li>

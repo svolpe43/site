@@ -1,0 +1,49 @@
+
+#banner-container {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 50px;
+	background-color: #f2f5f8;
+	z-index: 1000;
+	border-bottom: solid;
+	border-width: 1px;
+	border-color: #cbd6e2;
+}
+
+#banner {
+	width: 80%;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+#banner a{
+	text-decoration: none;
+	margin: 0;
+	color: #425b76;
+	font-weight: 200 !important;
+}
+
+#banner a:hover{
+	color: #4470b5;
+}
+
+#banner h4 {
+	display: inline-block;
+	margin: 15px 0;
+	font-weight: 200 !important;
+}
+
+#banner nav{
+	float: right;
+	margin: 15px 0;
+	color: #fff;
+}
+
+.nav a{
+	margin: 0 10px !important;
+}
+
+#wrapper{
+	overflow: hidden;
+}

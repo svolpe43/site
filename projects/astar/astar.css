@@ -1,0 +1,54 @@
+#wrapper {
+  width: 1050px;
+  overflow: hidden;
+  margin: 0 auto; }
+
+#title {
+  margin-top: 10px;
+  margin-bottom: 30px;
+  width: 100%;
+  text-align: left; }
+
+#settings {
+  float: left;
+  width: 300px;
+  margin-right: 50px;
+  display: inline-block; }
+
+#canvas-div {
+  float: left;
+  width: 700px;
+  overflow: hidden; }
+  #canvas-div #discanvas {
+    border: 2px solid #000;
+    border-radius: 5px; }
+
+.bottom-buttons, #controls, #board-set {
+  height: 100px;
+  float: left;
+  margin-top: 30px; }
+
+#board-set {
+  margin-left: 100px; }
+
+#deltaval {
+  margin-left: 100px; }
+
+#fast {
+  float: right; }
+
+.styled-select {
+  width: 100px;
+  height: 35px;
+  border: 1px solid #ccc;
+  border-radius: 5px; }
+
+.btn {
+  color: #fff;
+  background: #520052; }
+
+.btn:hover {
+  color: #fff !important;
+  background: #753375; }
+
+/*# sourceMappingURL=astar.css.map */

@@ -1,9 +1,9 @@
 % if section == 'head':
 
 	<title>A* Algorithm</title>
-	<script src="/astar/framework.js"></script>
-	<script src="/astar/astar.js"></script>
-	<link href="/astar/astar.css" rel="stylesheet"/>
+	<script src="/projects/astar/framework.js"></script>
+	<script src="/projects/astar/astar.js"></script>
+	<link href="/projects/astar/astar.css" rel="stylesheet"/>
 
 % elif section == 'content':
 	<div id="title">

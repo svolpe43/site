@@ -1,7 +1,7 @@
 
 import os
 from planets import get_next
-from bottle import run, route, template, static_file, request
+from bottle import run, route, template, static_file, request, error
 
 @route('/')
 def home():
@@ -43,19 +43,35 @@ def picman():
     return template('main', page='picman')
 
 # Projects
+
+'''
+    Projects
+'''
 @route('/projects')
 def projects():
     return template('main', page='projects')
 @route('/projects/<filename:path>')
 def projects(filename):
+    return static_file(filename, root='projects/')
+@route('/projects/img/<filename:path>')
+def projects(filename):
     return static_file(filename, root='projects/img/')
 
-# SpaceX dv
+'''
+    DeltaV
+'''
 @route('/projects/deltav')
 def deltav():
-    return template('main', page='projects/deltav')
+    return template('main', page='/projects/deltav')
+# /projects/deltav/deltav.js
+@route('/projects/deltav/<filename:path>')
+def deltav(filename):
+    print filename
+    return static_file(filename, root='/projects/deltav/')
 
-# Planets API
+'''
+    Planets API
+'''
 @route('/projects/planets')
 def planets():
     return template('main', page='projects/planets')
@@ -108,4 +124,6 @@ def send_static(filename):
         root = 'js/'
     return static_file(filename, root=root)
 
-run(host='localhost', port=8080, debug=True)
+@error(404)
+def error404(error):
+    return 'Nothing here, sorry'

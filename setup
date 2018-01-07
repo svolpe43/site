@@ -20,10 +20,11 @@ sudo /etc/init.d/apache2 restart
 </VirtualHost>
 
 # move files to the right place
-rsync -avz ./ ubuntu@184.72.93.196:/home/ubuntu/site/
+rsync -avz --exclude '.git' ./ ubuntu@184.72.93.196:/home/ubuntu/site/
 sudo rm -rf /var/www/site/*
 sudo cp -r /home/ubuntu/site/* /var/www/site/
-# remove the run from main.py
+# NOT NEEDED, OUTDATED remove the run from main.py
+sudo service apache2 restart
 
 # set permissions
 sudo chown -R www-data:www-data /var/www/site

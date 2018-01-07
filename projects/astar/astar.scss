@@ -1,0 +1,78 @@
+$settings-width: 300px;
+$canvas-width: 700px;
+
+$button-color: #520052;
+$button-hover-color: #753375;
+$white: #fff;
+$black: #000;
+
+#wrapper{
+	width: $settings-width + $canvas-width + 50px;
+	overflow: hidden;
+	margin: 0 auto;
+}
+
+#title{
+	margin-top: 10px;
+	margin-bottom: 30px;
+	width: 100%;
+	text-align: left;
+}
+
+#settings{
+	float: left;
+	width: $settings-width;
+	margin-right: 50px;
+	display: inline-block;
+}
+
+#canvas-div{
+	float: left;
+	width: $canvas-width;
+	overflow: hidden;
+
+	#discanvas{
+		border: 2px solid $black;
+		border-radius: 5px;
+	}
+}
+
+.bottom-buttons{
+	height: 100px;
+	float: left;
+	margin-top: 30px;
+}
+
+#controls{
+	@extend .bottom-buttons;
+}
+
+#board-set{
+	@extend .bottom-buttons;
+	margin-left: $settings-width / 3;
+}
+
+#deltaval{
+	margin-left: 100px;
+}
+
+#fast{
+	float: right;
+}
+
+.styled-select {
+	width: $settings-width / 3;
+	height: 35px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.btn {
+	color: $white;
+	background: $button-color;
+}
+
+.btn:hover {
+	color: $white !important;
+	background: $button-hover-color;
+}

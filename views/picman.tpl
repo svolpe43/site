@@ -7,7 +7,7 @@
         <h1>Pic-man</h1>
         <p>Pic-man is a development board powered by a 16 bit PIC microprocessor.</p>
         <div id="big-image">
-            <img src="/spaceform/img/picman.jpg" width="100%">
+            <img src="/projects/spaceform/img/picman.jpg" width="100%">
         </div>
         <div id="features">
             <h2>Features</h2>
@@ -34,19 +34,19 @@
 
         <div class="tile">
             <h4>1. Schematics</h4>
-            <img class="tile-image" src="/spaceform/img/circuit_diagram.png" alt="Step 2">
+            <img class="tile-image" src="/projects/spaceform/img/circuit_diagram.png" alt="Step 2">
         </div>
         <div class="tile">
             <h4>2. Routing</h4>
-            <img class="tile-image" src="/spaceform/img/board_diagram.png" alt="Step 3">
+            <img class="tile-image" src="/projects/spaceform/img/board_diagram.png" alt="Step 3">
         </div>
         <div class="tile">
             <h4>3. Printing</h4>
-            <img class="tile-image" src="/spaceform/img//pic7.jpg" alt="Step 3">
+            <img class="tile-image" src="/projects/spaceform/img//pic7.jpg" alt="Step 3">
         </div>
         <div class="tile">
             <h4>4. Soldering</h4>
-            <img class="tile-image" src="/spaceform/img//pic6.jpg" alt="Step 4">
+            <img class="tile-image" src="/projects/spaceform/img//pic6.jpg" alt="Step 4">
         </div>
     </div>
 
@@ -129,7 +129,7 @@
         <div class="picman-footer">
             <div class="section-title">
                 <h3>All libraries working in unison.</h3>
-                <img src="/spaceform/img/full_back.jpg" alt="Picman in unison" height="400px">
+                <img src="/projects/spaceform/img/full_back.jpg" alt="Picman in unison" height="400px">
             </div>
         </div>
     </div>

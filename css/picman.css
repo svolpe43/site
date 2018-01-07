@@ -44,6 +44,8 @@
 
 .section-title {
   text-align: center; }
+  .section-title p {
+    margin-top: 10px; }
 
 .lib {
   margin: 20px 0; }

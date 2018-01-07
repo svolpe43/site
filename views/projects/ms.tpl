@@ -2,8 +2,8 @@
 
 	<title>Mine Sweeper</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="/ms/ms.js"></script>
-	<link href="/ms/ms.css" rel="stylesheet"/>
+	<script src="/projects/ms/ms.js"></script>
+	<link href="/projects/ms/ms.css" rel="stylesheet"/>
 
 % elif section == 'content':
 	<div id="title">
