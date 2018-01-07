@@ -35,9 +35,9 @@ function render(rocket_name, payload){
 	html += '<input id="payload-input" class="inline" type="range"  min="0" max="' + rocket.payload_max + '" value="' + payload + '" onchange="render(\'' + rocket_name + '\', this)"/><hr>'
 	html += '<table class="table table-condensed">';
 	html += '<tr class="text-center"><th></th>';
-	html += '<th><h5 class="inline">Impulse (s)</h5><img class="inline" src="impulse.png" alt="Engine" height="15"></th>';
-	html += '<th><h5 class="inline">Wet (kg)</h5><img class="inline" src="full_cup.jpg" alt="Wet Mass" height="15"></th> ';
-	html += '<th><h5 class="inline">Dry (kg)</h5><img class="inline" src="empty_cup.png" alt="Dry Mass" height="15"></th></tr>';
+	html += '<th><h5 class="inline">Impulse (s)</h5><img class="inline" src="/impulse.png" alt="Engine" height="15"></th>';
+	html += '<th><h5 class="inline">Wet (kg)</h5><img class="inline" src="/full_cup.jpg" alt="Wet Mass" height="15"></th> ';
+	html += '<th><h5 class="inline">Dry (kg)</h5><img class="inline" src="/empty_cup.png" alt="Dry Mass" height="15"></th></tr>';
 
 	console.log(payload);
 
@@ -50,7 +50,7 @@ function render(rocket_name, payload){
 			var stage_dv = dv(seq[i], payload);
 			delta_v += stage_dv;
 
-			html += '<tr class="text-center"><td><img class="arrow" src="arrow.jpg" alt="Arrow">';
+			html += '<tr class="text-center"><td><img class="arrow" src="/arrow.jpg" alt="Arrow">';
 			html += '<h4>' + stage_dv.toFixed(2) + '&#916;V</h4></td>'
 			html += '<td>' + seq[i][0] + '</td>';
 			html += '<td>' + (seq[i][1] + payload) + '</td>';
@@ -120,7 +120,7 @@ function draw_earth_orbits(delta_v, body){
 
 function draw_image(image, cords){
 	var img = new Image();
-	img.src = image + '.jpg';
+	img.src = '/' + image + '.jpg';
 	img.onload = function(){
 		context.drawImage(img, cords.x - cords.dim/2, cords.y - cords.dim/2);
 	}

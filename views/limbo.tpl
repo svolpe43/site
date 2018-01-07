@@ -1,50 +1,28 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <link rel="shortcut icon" type="image/ico" href="favicon.png" />
-    <link href="blog.css" rel="stylesheet"/>
-    <link href="banner.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-    <script src="limbo/cali.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9D-u1zwhEiZtleUKz-2IC_3mLVs6__E&callback=init"></script>
-  </head>
-  <body>
-    <div id="banner-container">
-      <div id="banner">
-        <a href="http://shawnvolpe.com"><h4>Shawn Volpe</h4></a>
-        <nav>
-          <a href="/limbo">Limbo</a>
-          <a href="/spaceform">Spaceform</a>
-          <a href="/planets">Planets</a>
-          <a href="/cfsh">Cfsh</a>
-          <a href="/deltav">DeltaV</a>
-          <a href="/astar">A*</a>
-          <a href="/arc">Arc</a>
-          <a href="/gol">Game of Life</a>
-          <a href="/ms">Mine Sweeper</a>
-        </nav>
-      </div>
-    </div>
-    <div id="wrapper">
-      <div id="title">
+
+
+% if section == 'head':
+  <link href="blog.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="limbo/cali.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBK9D-u1zwhEiZtleUKz-2IC_3mLVs6__E&callback=init"></script>
+% elif section == 'content':
+
+<div id="title">
         <h2>60 Days in Limbo</h2><br><br>
         <h4>A journey across the country.</h4>
       </div>
       <div id="blog" class="no-indent">
         <p>
-          After 2 years in Boston it was time for a new adventure.  Jesse and I choose to move to Los Angeles. We sold our furniture, bought a 4Runner and left. 10,036 miles later we landed in LA.
+          After 2 years in Boston Jesse and I choose to move to Los Angeles. We bought a 4Runner and a box trailer and after 60 days and 10,036 miles we arrived in LA.
         </p>
-
-        <p>There are over 2000 pictures of this trip. The rest will be available soon.</p>
 
         <h3>Route</h3>
         <div id="progress-wrapper">
           <p>Loading 60470 latitude and longitude points.</p>
           <div id="progress-container">
             <div id="progress"></div>
-          </div>
+          </div>  
         </div>
         <div id="route-map"></div>
 
@@ -196,6 +174,5 @@
           <img src="/limbo/img/jesse_kep.jpg" alt="night-distribution" width="100%">
         </div>
       </div>
-    </div>
-  </body>
-</html>
+
+% end

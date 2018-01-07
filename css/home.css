@@ -1,55 +1,50 @@
+#banner-container {
+  display: none; }
 
-html body{
-	background-image: url("woods.jpg");
-	background-size: 100%;
-}
+#image {
+  position: relative;
+  text-align: center; }
+  #image h3 {
+    left: 0;
+    position: absolute;
+    top: 10%;
+    width: 100%;
+    font-weight: 100;
+    font-size: 50px; }
+  #image h4 {
+    left: 0;
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    font-weight: 100;
+    font-size: 30px; }
 
-#top{
-	overflow: hidden;
-	margin: 20px 0;
-}
+#links {
+  padding: 10px;
+  margin: 0 auto;
+  width: 130px; }
+  #links a {
+    display: inline-block;
+    margin: 0 5px; }
 
-#github-link {
-	overflow: hidden;
-	display: inline-block;
-	line-height: 56px;
-}
+#tile-container {
+  margin: 0 auto;
+  width: 1300px;
+  overflow: hidden;
+  margin-bottom: 50px; }
+  #tile-container h2 {
+    font-weight: 300; }
+  #tile-container a {
+    color: #000; }
+  #tile-container a:hover {
+    color: #337ab7 !important; }
 
-#container{
-	width: 90%;
-	margin: 0 auto;
-}
+.tile {
+  width: 320px;
+  padding: 20px 10px;
+  float: left; }
 
-#wrapper {
-	overflow: hidden;
-}
+.tile-image {
+  width: 100%; }
 
-ul {
-	padding: 0;
-}
-
-li {
-	list-style-type: none;
-	text-decoration: none !important;
-}
-
-h3, a{
-	color: #a50932 !important;
-	font-size: 16px;
-	float: left;
-	margin-right: 10px;
-	overflow: hidden;
-}
-
-a:hover, li:hover{
-	color: #205fa3 !important;
-}
-
-p{
-	line-height: 25px;
-	color: #000;
-	font-size: 15px;
-	overflow: hidden;
-	display: inline-block;
-}
-
+/*# sourceMappingURL=home.css.map */

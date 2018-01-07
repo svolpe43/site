@@ -13,7 +13,7 @@
 }
 
 #title{
-	margin-top: 40px;
+	margin-top: 10px;
 	margin-bottom: 20px;
 	width: 100%;
 	overflow: hidden;
@@ -36,6 +36,10 @@
 
 #title h4 {
 	margin: 0;
+}
+
+.center-text{
+	text-align: center;
 }
 
 #title #cfsh-logo{

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<!-- saved from url=(0028)http://localhost:8080/picman -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="shortcut icon" type="image/ico" href="http://localhost:8080/favicon.png">
+    <link rel="stylesheet" href="./picman_files/bootstrap.min.css">
+    <link rel="stylesheet" href="./picman_files/bootstrap-theme.min.css">
+
+    <link href="./picman_files/banner.css" rel="stylesheet">
+
+
+  <link href="./picman_files/picman.css" rel="stylesheet">
+
+  </head>
+  <body>
+<div id="banner-container">
+  <div id="banner">
+    <a href="http://localhost:8080/"><h4>Shawn Volpe</h4></a>
+    <nav class="nav">
+      <a href="http://localhost:8080/limbo">Limbo</a>
+      <a href="http://localhost:8080/picman">Picman</a>
+      <a href="http://localhost:8080/cfsh">Cfsh</a>
+      <a href="http://localhost:8080/arc">Arc</a>
+      <a href="http://localhost:8080/projects">Projects</a>
+    </nav>
+  </div>
+</div>  <div id="wrapper">
+
+
+    <div id="top">
+        <h1>Pic-man</h1>
+        <div id="big-image">
+            <img src="./picman_files/picman.jpg" height="300px">
+        </div>
+        <div id="features">
+            <h2>Features</h2>
+            <ul>
+                <li>16 MIPS, 32 Mhz, 8K RAM</li>
+                <li>OLED/LED Screen Output with Library</li>
+                <li>14 IO pins</li>
+                <li>6 Analog IO pins</li>
+                <li>8 IO pins that can be used at 3V or 5V logic</li>
+                <li>8 3V or 5V outputs</li>
+                <li>Control up to 4 DC motors or 2 stepper motors</li>
+                <li>PicKit 3 connector</li>
+            </ul>
+        </div>
+    </div>
+
+    <hr>
+
+    <div id="steps">
+        <div class="tile">
+            <h4>Breadboarding</h4>
+            <img class="tile-image" src="./picman_files/circuit_diagram.png" alt="Step 1">
+        </div>
+        <div class="tile">
+            <h4>Schematics</h4>
+            <img class="tile-image" src="./picman_files/finished_circuit_cropped.jpg" alt="Step 2">
+        </div>
+        <div class="tile">
+            <h4>Routing</h4>
+            <img class="tile-image" src="./picman_files/board_diagram.png" alt="Step 3">
+        </div>
+        <div class="tile">
+            <h4>Printing</h4>
+            <img class="tile-image" src="./picman_files/pic7.jpg" alt="Step 3">
+        </div>
+        <div class="tile">
+            <h4>Soldering</h4>
+            <img class="tile-image" src="./picman_files/pic6.jpg" alt="Step 4">
+        </div>
+    </div>
+
+    <hr>
+
+    <div id="details">
+
+        <div id="libraries">
+            <h2>Libraries</h2>
+            <p>All the libraries can be found in this <a href="https://github.com/svolpe43/magnes">Github repo.</a>
+
+            </p><div class="lib">
+                <h3>OLED/LED Screen</h3>
+                <p>This library can be used to power a 2 row OLED screen. The board comes with a 5x2 connector that can hook up to common screens bought from Adafruit or Sparkfun.</p>
+                <div class="lib-functions">
+                    <p><strong>Functions</strong></p>
+                    <ul>
+                        <li><p>init_oled( )</p></li>
+                        <li><p>set_cursor( int col, int row )</p></li>
+                        <li><p>print( char* text )</p></li>
+                        <li><p>clear( )</p></li>
+                        <li><p>home( )</p></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="lib">
+                <h3>Stepper Motors</h3>
+                <p>This library can be used to control stepper motors in full stepping mode or half stepping.</p>
+                <div class="lib-functions">
+                    <p><strong>Functions</strong></p>
+                    <ul>
+                        <li><p>init_stepper( )</p></li>
+                        <li><p>move_deg( float degrees, float degree )</p></li>
+                        <li><p>set_rpm( float rpm )</p></li>
+                        <li><p>stop( )</p></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="lib">
+                <h3>Rotary Encoder</h3>
+                <p>This library can be used to handle input from a stadard rotary encoder with a button. It has 3 digital inputs, 2 for the rotary encoder and 1 for the button.</p>
+                <div class="lib-functions">
+                    <p><strong>Functions</strong></p>
+                    <ul>
+                        <li><p>init_rot( )</p></li>
+                        <li><p>unsigned char get_rot_value( );</p></li>
+                        <li><p>unsigned char get_rot_but_value( )</p></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="lib">
+                <h3>Analog Input</h3>
+                <p>This library can be used to handle analog inputs. It is commonly used for Potentiometer inputs.</p>
+                <div class="lib-functions">
+                    <p><strong>Functions</strong></p>
+                    <ul>
+                        <li><p>init_ad( )</p></li>
+                        <li><p>int get_ad_value( )</p></li>
+                        <li><p>unsigned char get_rot_but_value( )</p></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="lib">
+                <h3>Pulse Width Modulation</h3>
+                <p>This library uses the output capture feature of the PIC and can be used to output a PWM signal on a IO pin.</p>
+                <div class="lib-functions">
+                    <p><strong>Functions</strong></p>
+                    <ul>
+                        <li><p>update_pwm( int duty_index )</p></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="big-image">
+            <h3>All libraries working in unison.</h3>
+            <img src="./picman_files/woods.jpg" alt="Step 1" height="200px">
+        </div>
+    </div>
+	</div>
+  
+
+</body></html>

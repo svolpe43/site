@@ -8,6 +8,7 @@
 		
 		<link href="arc/arc.css" rel="stylesheet"/>
 		<link href="banner.css" rel="stylesheet"/>
+		<link href="footer.css" rel="stylesheet"/>
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -26,36 +27,23 @@
 		<script src="arc/data.js"></script>
 	</head>
 	<body>
-		<div id="banner-container">
-	      <div id="banner">
-	        <a href="http://shawnvolpe.com"><h4>Shawn Volpe</h4></a>
-	        <nav>
-	          <a href="/limbo">Limbo</a>
-	          <a href="/spaceform">Spaceform</a>
-	          <a href="/planets">Planets</a>
-	          <a href="/cfsh">Cfsh</a>
-	          <a href="/deltav">DeltaV</a>
-	          <a href="/astar">A*</a>
-	          <a href="/arc">Arc</a>
-	          <a href="/gol">Game of Life</a>
-	          <a href="/ms">Mine Sweeper</a>
-	        </nav>
-	      </div>
-	    </div>
-		<div id="container">
-			<div id="top">
-				<h2>Arc</h2>
-				<div id="message"></div>
-				<div id="start">
-					<p>Arc uses Google Drive to save your file. It will save automatically just like a Google Doc will save. No need to hit save. When clicking start you will be asked to sign into Google. The app will then create a arc.txt file in your Google Drive and your notes will be backed up there.</p>
-					<h4 onclick="start()">Start</h4>
+		% include('banner.tpl')
+		<div id="wrapper">
+			<div id="container">
+				<div id="top">
+					<h2>Arc</h2>
+					<div id="message"></div>
+					<div id="start">
+						<p>Arc uses Google Drive to save your note. The note will automatically save just like a Google Doc. No need to hit save. When clicking start you will be asked to sign into Google. The app will then create a arc.txt file in Google Drive and where the note is stored.</p>
+						<h4 onclick="start()">Start</h4>
+					</div>
 				</div>
+				<div id="hotkeys"></div>
+				<div id="wrappers">
+					<div id="note"></div>
+				</div>
+				<div id="footer"></div>
 			</div>
-			<div id="hotkeys"></div>
-			<div id="wrappers">
-				<div id="note"></div>
-			</div>
-			<div id="footer"></div>
 		</div>
 	</body>
 </html>

@@ -1,0 +1,41 @@
+#wrapper {
+  width: 65%;
+  margin: 0 auto; }
+
+.tile {
+  margin: 20px 0;
+  padding: 30px 0;
+  overflow: hidden;
+  border-bottom: 1px solid #cbd6e2; }
+  .tile p {
+    font-size: 16px; }
+  .tile .info {
+    width: 70%;
+    padding: 5px 40px; }
+  .tile a {
+    text-decoration: none;
+    color: inherit; }
+  .tile .tile-header {
+    display: inline-block;
+    width: 100%; }
+  .tile .tile-title {
+    float: left; }
+    .tile .tile-title h4 {
+      font-weight: 200;
+      font-size: 40px; }
+  .tile .github-link {
+    float: right; }
+
+.tile-left img {
+  float: left; }
+.tile-left .info {
+  float: right;
+  padding-right: 0; }
+
+.tile-right img {
+  float: right; }
+.tile-right .info {
+  float: left;
+  padding-left: 0; }
+
+/*# sourceMappingURL=tiles.css.map */

@@ -1,0 +1,59 @@
+#wrapper {
+  width: 80%;
+  margin: 0 auto; }
+
+#top {
+  width: 900px;
+  overflow: hidden;
+  margin: 0 auto;
+  text-align: center; }
+  #top #big-image {
+    float: left;
+    padding: 30px;
+    width: 50%; }
+  #top #features {
+    width: 50%;
+    float: left;
+    padding: 30px; }
+    #top #features h2 {
+      margin-top: 0; }
+    #top #features ul {
+      text-align: left; }
+    #top #features li {
+      font-size: 15px; }
+
+#steps {
+  margin: 0 auto;
+  width: 1000px;
+  overflow: hidden;
+  text-align: center; }
+  #steps .tile {
+    float: left;
+    width: 500px;
+    display: inline-block;
+    padding: 0 10px;
+    margin: 30px 0; }
+  #steps .tile-image {
+    height: 300px; }
+
+#libraries {
+  margin: 0 200px; }
+
+#details {
+  margin: 50px auto; }
+
+.section-title {
+  text-align: center; }
+
+.lib {
+  margin: 20px 0; }
+
+.lib-functions {
+  margin-left: 30px; }
+  .lib-functions p {
+    margin: 0; }
+
+.picman-footer {
+  margin: 50px; }
+
+/*# sourceMappingURL=picman.css.map */

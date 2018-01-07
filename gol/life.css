@@ -2,11 +2,11 @@
 	width: 1300px;
 	overflow: hidden;
 	margin: 0 auto;
-	margin-top: 50px;
+	margin-top: 30px;
 }
 
 #title{
-	margin-top: 30px;
+	margin-top: 10px;
 	margin-bottom: 30px;
 	margin-left: 50px;
 	width: 100%;
@@ -119,9 +119,9 @@
 	border-radius: 9px;
 	font-family: Arial;
 	color: #ffffff;
-	font-size: 8px;
+	font-size: 12px;
 	background: #9966ff;
-	padding: 10px 20px 10px 20px;
+	padding: 8px 18px;
 	text-decoration: none;
 }
 
