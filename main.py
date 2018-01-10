@@ -1,4 +1,3 @@
-
 import os
 from planets import get_next
 from bottle import run, route, template, static_file, request, error
@@ -7,7 +6,9 @@ from bottle import run, route, template, static_file, request, error
 def home():
     return template('main', page='home')
 
-# Limbo
+'''
+    Limbo
+'''
 @route('/limbo')
 def limbo():
     return template('main', page='limbo')
@@ -18,7 +19,9 @@ def limbo(filename):
 def limbo(filename):
     return static_file(filename, root='limbo/')
 
-# Arc
+'''
+    Arc
+'''
 @route('/arc')
 def arc():
     return template('arc')
@@ -26,7 +29,9 @@ def arc():
 def arc(filename):
     return static_file(filename, root='arc/')
 
-# Cfsh
+'''
+    Cfsh
+'''
 @route('/cfsh')
 def cfsh():
     return template('main', page='cfsh')
@@ -37,12 +42,12 @@ def cfsh(filename):
 def cfsh(filename):
     return static_file(filename, root='cfsh/')
 
-# Picman
+'''
+    Pic-man
+'''
 @route('/picman')
 def picman():
     return template('main', page='picman')
-
-# Projects
 
 '''
     Projects
@@ -62,12 +67,10 @@ def projects(filename):
 '''
 @route('/projects/deltav')
 def deltav():
-    return template('main', page='/projects/deltav')
-# /projects/deltav/deltav.js
+    return template('main', page='projects/deltav')
 @route('/projects/deltav/<filename:path>')
 def deltav(filename):
-    print filename
-    return static_file(filename, root='/projects/deltav/')
+    return static_file(filename, root='projects/deltav/')
 
 '''
     Planets API
@@ -77,41 +80,54 @@ def planets():
     return template('main', page='projects/planets')
 @route('/projects/planets/step')
 def planets_step():
-	return get_next(request.query.last)
+    return get_next(request.query.last)
+@route('/projects/planets/<filename:path>')
+def projects(filename):
+    return static_file(filename, root='projects/planets/')
 
-# Astar
+'''
+    Astar
+'''
 @route('/projects/astar')
 def astar():
     return template('main', page='projects/astar')
-@route('/astar/<filename:path>')
+@route('/projects/astar/<filename:path>')
 def arc(filename):
-    return static_file(filename, root='astar/')
+    return static_file(filename, root='projects/astar/')
 
-# Game of Life
+'''
+    Game of Life
+'''
 @route('/projects/gol')
 def gol():
     return template('main', page='projects/gol')
-@route('/gol/<filename:path>')
+@route('/projects/gol/<filename:path>')
 def cfsh(filename):
     return static_file(filename, root='gol/')
 
-# Spaceform
+'''
+    Spaceform
+'''
 @route('/projects/spaceform')
 def spaceform():
-    return template('main', page='spaceform')
-@route('/spaceform/img/<filename:path>')
+    return template('main', page='projects/spaceform')
+@route('/projects/spaceform/img/<filename:path>')
 def spaceform(filename):
-    return static_file(filename, root='spaceform/img/')
+    return static_file(filename, root='projects/spaceform/img/')
 
-# Minesweeper
+'''
+    Minesweeper
+'''
 @route('/projects/ms')
 def ms():
     return template('main', page='projects/ms')
-@route('/ms/<filename:path>')
+@route('/projects/ms/<filename:path>')
 def ms(filename):
-    return static_file(filename, root='ms/')
+    return static_file(filename, root='projects/ms/')
 
-# Static files
+'''
+    Static
+'''
 @route('/<filename:path>')
 def send_static(filename):
     ext = os.path.splitext(filename)[1]
@@ -126,4 +142,4 @@ def send_static(filename):
 
 @error(404)
 def error404(error):
-    return 'Nothing here, sorry'
+    return template('main', page='404')

@@ -28,7 +28,7 @@
 		<img src="/projects/spaceform/img/full_front.jpg" alt="night-distribution" width="30%">
 		<div class="info">
 			<div class="tile-header">
-				<a class="tile-title" href="/projects/spaceform"><h4>SpaceForm</h4></a>
+				<a class="tile-title" href="/projects/spaceform"><h4>Spaceform</h4></a>
 				<a class="github-link" href="https://github.com/svolpe43/magnes"><img src="github.png" alt="Github link" height="30px"/></a>
 			</div>
 			<p>The Earth suspended in mid air with magnets which can accurately rotate to match the current Earth's position. Or just set it to any time and watch it rotate.</p>

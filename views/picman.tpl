@@ -65,25 +65,25 @@
             <div class="lib-functions">
                 <p><strong>Functions</strong></p>
                 <ul class="list-group">
-                    <li class="list-group-item"><p>init_oled( )</p></li>
-                    <li class="list-group-item"><p>set_cursor( int col, int row )</p></li>
-                    <li class="list-group-item"><p>print( char* text )</p></li>
-                    <li class="list-group-item"><p>clear( )</p></li>
-                    <li class="list-group-item"><p>home( )</p></li>
+                    <li class="list-group-item"><p>void <strong>init_oled</strong> ( void )</p> - Sets IO pins and runs through screen start routine.</li>
+                    <li class="list-group-item"><p>void <strong>set_cursor</strong> ( int col, int row ) - Set the cursor to the specified row and column.</p></li>
+                    <li class="list-group-item"><p>void <strong>print</strong> ( char* text )</p> - Prints a string to the screen.</li>
+                    <li class="list-group-item"><p>void <strong>clear</strong> ( void ) - Clears the screen.</p></li>
+                    <li class="list-group-item"><p>void <strong>home</strong> ( void ) - Set the cursor to the first column on the first row.</p></li>
                 </ul>
             </div>
         </div>
 
         <div class="lib">
             <h3>Stepper Motors</h3>
-            <p>This library can be used to control stepper motors in full stepping mode or half stepping.</p>
+            <p>This library can be used to control stepper motors in full or half stepping modes.</p>
             <div class="lib-functions">
                 <p><strong>Functions</strong></p>
                 <ul class="list-group">
-                    <li class="list-group-item"><p>init_stepper( )</p></li>
-                    <li class="list-group-item"><p>move_deg( float degrees, float degree )</p></li>
-                    <li class="list-group-item"><p>set_rpm( float rpm )</p></li>
-                    <li class="list-group-item"><p>stop( )</p></li>
+                    <li class="list-group-item"><p>void <strong>init_stepper</strong> (void )</p></li>
+                    <li class="list-group-item"><p>void <strong>move_deg</strong> ( float degrees, float degree )</p></li>
+                    <li class="list-group-item"><p>void <strong>set_rpm</strong> ( float rpm )</p></li>
+                    <li class="list-group-item"><p>void <strong>stop</strong> (void )</p></li>
                 </ul>
             </div>
         </div>
@@ -94,22 +94,22 @@
             <div class="lib-functions">
                 <p><strong>Functions</strong></p>
                 <ul class="list-group">
-                    <li class="list-group-item"><p>init_rot( )</p></li>
-                    <li class="list-group-item"><p>unsigned char get_rot_value( );</p></li>
-                    <li class="list-group-item"><p>unsigned char get_rot_but_value( )</p></li>
+                    <li class="list-group-item"><p>void <strong>init_rot</strong> ( void )</p></li>
+                    <li class="list-group-item"><p>unsigned char <strong>get_rot_value</strong> ( void )</p></li>
+                    <li class="list-group-item"><p>unsigned char <strong>get_rot_but_value</strong> ( void )</p></li>
                 </ul>
             </div>
         </div>
 
         <div class="lib">
             <h3>Analog Input</h3>
-            <p>This library can be used to handle analog inputs. It is commonly used for Potentiometer inputs.</p>
+            <p>This library can be used to handle analog inputs like a potentiometer or something.</p>
             <div class="lib-functions">
                 <p><strong>Functions</strong></p>
                 <ul class="list-group">
-                    <li class="list-group-item"><p>init_ad( )</p></li>
-                    <li class="list-group-item"><p>int get_ad_value( )</p></li>
-                    <li class="list-group-item"><p>unsigned char get_rot_but_value( )</p></li>
+                    <li class="list-group-item"><p>void <strong>init_ad</strong> ( void )</p></li>
+                    <li class="list-group-item"><p>int <strong>get_ad_value</strong> ( void )</p></li>
+                    <li class="list-group-item"><p>unsigned char <strong>get_rot_but_value</strong> ( void )</p></li>
                 </ul>
             </div>
         </div>
@@ -120,7 +120,7 @@
             <div class="lib-functions">
                 <p><strong>Functions</strong></p>
                 <ul class="list-group">
-                    <li class="list-group-item"><p>update_pwm( int duty_index )</p></li>
+                    <li class="list-group-item"><p>void <strong>update_pwm</strong> ( int duty_index )</p></li>
                 </ul>
             </div>
         </div>

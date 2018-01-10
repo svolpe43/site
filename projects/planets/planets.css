@@ -12,22 +12,22 @@
 	margin: 0 auto;
 }
 
-h5, h3{
-	display: inline;
-	margin-right: 7px;
-}
-
 #info {
 	margin-top: 10px !important;
 	width: 700px;
 	margin: 0 auto;
 }
 
-pre {
+#canvas-div h5, #canvas-div h3, #info h3{
+	display: inline;
+	margin-right: 7px;
+}
+
+#info pre {
 	width: 50%;
 	margin: 0 auto !important;
 }
 
-p{
+#info p{
 	text-align:justify
 }

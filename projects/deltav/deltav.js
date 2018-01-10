@@ -33,7 +33,7 @@ function render(rocket_name, payload){
 	html += '<h3 class="inline" id="rocket-name">' + rocket.name + '</h3>';
 	html += '<p class="inline">Payload:</p><h5 id="payload" class="inline">' + payload + ' kg<h5>';
 	html += '<input id="payload-input" class="inline" type="range"  min="0" max="' + rocket.payload_max + '" value="' + payload + '" onchange="render(\'' + rocket_name + '\', this)"/><hr>'
-	html += '<table class="table table-condensed">';
+	html += '<table class="table table-hover table-condensed">';
 	html += '<tr class="text-center"><th></th>';
 	html += '<th><h5 class="inline">Impulse (s)</h5><img class="inline" src="/projects/deltav/impulse.png" alt="Engine" height="15"></th>';
 	html += '<th><h5 class="inline">Wet (kg)</h5><img class="inline" src="/projects/deltav/full_cup.jpg" alt="Wet Mass" height="15"></th> ';
