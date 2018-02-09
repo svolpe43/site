@@ -7,9 +7,6 @@ var select_key_down = false;
 var mouse_down = false;
 var binded = false;
 
-var num_changes = 0; // for undo
-
-
 // TODO
 // - mouse bindings not working
 // - do the mass indent and unindent
@@ -55,61 +52,33 @@ function user_input(e){
 	// make sure to count changes
 	changes = true;
 
-	// every 5 inputs add a history snapshot
-	if(num_changes == HISTORY_MAX_COUNT){
-		addHistorySnapshot(getFocusId());
-		num_changes = 0;
-	}else{
-		num_changes++;
-	}
-
 	// ctrl hot keys
-	 if (e.ctrlKey || e.metaKey) {
-        switch (key){
-	       	// s - force save the doc
-	        case 83:
-	            e.preventDefault();
-	            save_grive_file();
-	            break;
-	        // a - jump to begining of line
-	        case 65:
-	            e.preventDefault();
-	            setCaretPosition(focus[0], 0);
-	            break;
-	        // e - jump to the end of the line
-	        case 69:
-	            e.preventDefault();
-	            setCaretPosition(focus[0], focus.val().length);
-	            break;
-	        // d - setting line to done
-	        case 68:
-	        	e.preventDefault();
-	        	setDone(getFocusId());
-	        	break;
-	       	// p - inserts the formatted time at the cursor
-	        case 80:
-	        	e.preventDefault();
-	        	insertTime();
-	        	break;
-	        // c - collapses the node
-	        case 67:
-	        	e.preventDefault();
-	        	toggleCollapse(getFocusId());
-	        	break;
-	        // 1 - dragging for multiple selection
-	        case 49:
-	        	e.preventDefault();
-	        	bind_mouse();
-	        	break;
-	        // left arrow
-			case 37:
+	if (e.ctrlKey || e.metaKey) {
+		switch (key){
+			// s - force save the doc
+			case 83:
 				e.preventDefault();
-				next("left");
+				save_grive_file();
 				break;
-			// right arrow
-			case 39:
+			// a - jump to begining of line
+			case 65:
 				e.preventDefault();
-				next("right");
+				setCaretPosition(focus[0], 0);
+				break;
+			// e - jump to the end of the line
+			case 69:
+				e.preventDefault();
+				setCaretPosition(focus[0], focus.val().length);
+				break;
+			// d - setting line to done
+			case 68:
+				e.preventDefault();
+				setDone(getFocusId());
+				break;
+			// p - inserts the formatted time at the cursor
+			case 80:
+				e.preventDefault();
+				insertTime();
 				break;
 			// up arrow
 			case 38:
@@ -122,44 +91,65 @@ function user_input(e){
 				nextAtCurDepth("down");
 				break;
 			// delete
-			case 46:
+			case 8:
 				e.preventDefault();
-				addDeleteHistory(getFocusId());
+				history_delete_line(getFocusId());
 				delete_line();
+				break;
+			// u - collapses the node
+			case 85:
+				e.preventDefault();
+				toggleCollapse(getFocusId());
 				break;
         }
 
-       	// z
-        if(key == 90){
-	        // shift - z redo
-	        if(e.shiftKey){
-        		e.preventDefault();
-        		redo();
-	        // no shift - z undo
-	        }else{
-        		e.preventDefault();
-        		undo();
-	        }
-	    }
-    }
+		// ctrl - z
+		if(key == 90){
+			// ctr - shift - z redo
+			if(e.shiftKey){
+				//e.preventDefault();
+				//redo();
+			// ctr - z - undo
+			}else{
+				//e.preventDefault();
+				//undo();
+			}
+		}
+	}else{
 
-    // non-ctrl hot keys
-	switch(key){
-		// tab key
-		case 9:
-			e.preventDefault();
-			indent("indent");
-			break;
-		// grave accent
-		case 192:
-			e.preventDefault();
-			indent("unindent");
-			break;
-		// enter
-		case 13:
-			e.preventDefault();
-			addAddHistory(getFocusId());
-			add_line();
-			break;
-	}
+	    // non-ctrl hot keys
+		switch(key){
+			// up arrow
+			case 38:
+				e.preventDefault();
+				next("up");
+				return;
+			// down arrow
+			case 40:
+				e.preventDefault();
+				next("down");
+				return;
+			// tab key
+			case 9:
+				e.preventDefault();
+				indent("indent");
+				return;
+			// grave accent
+			case 192:
+				e.preventDefault();
+				indent("unindent");
+				return;
+			// enter
+			case 13:
+				e.preventDefault();
+				history_add_line(getFocusId());
+				add_line();
+				return;
+			// r - dragging for multiple selection
+			case 9999:
+				e.preventDefault();
+				bind_mouse();
+				return;
+		}
+    }
 }

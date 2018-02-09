@@ -33,7 +33,7 @@
 				<div id="top">
 					<h2>Arc</h2>
 					<div id="message"></div>
-					<div id="start">
+					<div id="start" style="display: none">
 						<p>Arc uses Google Drive to save your note. The note will automatically save just like a Google Doc. No need to hit save. When clicking start you will be asked to sign into Google. The app will then create a arc.txt file in Google Drive and where the note is stored.</p>
 						<h4 onclick="start()">Start</h4>
 					</div>

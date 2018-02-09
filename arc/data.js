@@ -93,7 +93,7 @@ var hotkeys = [
 	},
 	{
 		"key": "Crt-Delete",
-		"action": "Delete line*"
+		"action": "Delete line"
 	},
 	{
 		"key": "Crt-s",
@@ -113,7 +113,7 @@ var hotkeys = [
 	},
 	{
 		"key": "Crt-shift-z",
-		"action": "Undo"
+		"action": "Redo"
 	},
 	{
 		"key": "Crt-d",
@@ -124,27 +124,30 @@ var hotkeys = [
 		"action": "Insert time"
 	},
 	{
-		"key": "Crt-q",
+		"key": "Crt-u",
 		"action": "Collapses current line"
 	},
 	{
-		"key": "Crt-r mouse drag",
-		"action": "Select multiple lines"
-	},
-	{
 		"key": "Left arrow",
-		"action": "Next line"
+		"action": "Previous char"
 	},
 	{
 		"key": "Right arrow",
-		"action": "Previous line"
+		"action": "Next char"
 	},
 	{
 		"key": "Up arrow",
-		"action": "Previous child line"
+		"action": "Previous line"
 	},
 	{
 		"key": "Down arrow",
-		"action": "Next child line"
+		"action": "Next line"
+	},{
+		"key": "Ctr-Up arrow",
+		"action": "Previous sibling line"
 	},
+	{
+		"key": "Ctr-Down arrow",
+		"action": "Next sibling line"
+	}
 ];

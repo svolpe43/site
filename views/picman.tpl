@@ -7,7 +7,7 @@
         <h1>Pic-man</h1>
         <p>Pic-man is a development board powered by a 16 bit PIC microprocessor.</p>
         <div id="big-image">
-            <img src="/projects/spaceform/img/picman.jpg" width="100%">
+            <img src="/projects/spaceform/img/picman2.jpg" width="100%">
         </div>
         <div id="features">
             <h2>Features</h2>

@@ -28,26 +28,41 @@ var file = null;
 var changes = false;
 var lastSaveDate = 0;
 
-// check if the user is authenticated without a GUI response
-function checkAuth() {
-	console.log("Checking auth(without popup)...");
-	gapi.client.setApiKey(API_KEY);
-	var auth_params = {'client_id': CLIENT_ID, 'scope': SCOPES, 'immediate': true};
-	gapi.auth.authorize(auth_params, handleAuth);
+function checkAuth(callback){
+	gapi.client.init({
+		apiKey: API_KEY,
+		clientId: CLIENT_ID,
+		scope: SCOPES
+	}).then(function () {
+		if(gapi.auth2.getAuthInstance().isSignedIn.get()){
+			update_signin_status(true, callback);
+		}else{
+
+			$("#start").show();
+
+			// listen for sign-in state changes.
+			gapi.auth2.getAuthInstance().isSignedIn.listen(function(is_signed_in){
+				update_signin_status(is_signed_in, callback)
+			});
+
+			// handle the initial sign-in state.
+			update_signin_status(gapi.auth2.getAuthInstance().isSignedIn.get());
+
+			// sign in
+			gapi.auth2.getAuthInstance().signIn({prompt: 'consent'});
+		}
+	});
 }
 
-// acts on a Google Drive authentication object
-function handleAuth(authResult) {
-	/*Either
-		- Access token has been successfully retrieved, requests can be sent to the API.
-		- No access token could be retrieved, show the button to start the authorization flow.*/
-	authed = (authResult && !authResult.error) ? true : false;
-	if(authed){
+function update_signin_status(isSignedIn, callback) {
+	if (isSignedIn) {
+		console.log('signed in');
 		request_grive_file();
-	}else{
-		console.log("Going into auth flow...");
-		var auth_params = {'client_id': CLIENT_ID, 'scope': SCOPES, 'immediate': false};
-		gapi.auth.authorize(auth_params, handleAuth);
+
+		if(callback)
+			callback();
+	} else {
+		console.log('not signed in');
 	}
 }
 
@@ -66,50 +81,50 @@ function request_grive_file(){
 	// if it was at the end it would get there before the file was fully downloaded
   	request.execute(function(response){
 
-		if(response.items){
-			// we found one 'arc.txt' file
-			if(response.items.length == 1){
-				// catch corrupt json
-				try{
-					// set the file now cause we don't have scope onces its parcable
-					file = response.items[0];
-					download_file(response.items[0], function(response){
-						// catching undefined response error
-						if(typeof response === 'undefined'){
-							alert("Trouble downloading the Google Drive file.")
-							page = example_page;
-							file = null;
-							populate();
-						}else{
-							page = JSON.parse(response);
-							populate();
-							setInterval(save_grive_file, SAVE_INTERVAL);
-						}
-					});
-				}catch(e){
-					// if we failed to parse
-					alert(corrupt_error);
-					page = [new Liner("", 0)];
-					populate();
-				}
-			// more then one 'arc.txt' file found
-			}else if(response.items.length > 1){
-				alert(multiple_error);
-				page = example_page;
-				populate();
-			}else{
-				// create the file and initiate a blank page
-				console.log("not found")
-				add_grive_file();
-				page = example_page;
-				populate();
-			}
-		}else{
-			alert(api_error);
-  			page = example_page;
-  			populate();
+		if(response.error || !response.items){
+			var error = (response.error.message) ? response.error.message : api_error;
+			alert_error(error);
+			return;
 		}
-  	});
+
+		// we found one 'arc.txt' file
+		if(response.items.length == 1){
+			// catch corrupt json
+			try{
+				// set the file now cause we don't have scope onces its parcable
+				file = response.items[0];
+				download_file(response.items[0], function(response){
+					// catching undefined response error
+					if(typeof response === 'undefined'){
+						alert_error("Trouble downloading the Google Drive file.");
+					}else{
+						page = JSON.parse(response);
+						populate();
+						setInterval(save_grive_file, SAVE_INTERVAL);
+					}
+				});
+			}catch(e){
+				alert_error(corrupt_error);
+			}
+		// more then one 'arc.txt' file found
+		}else if(response.items.length > 1){
+			alert(multiple_error);
+			page = example_page;
+			populate();
+		}else{
+			// create the file and initiate a blank page
+			add_grive_file();
+			page = example_page;
+			populate();
+			setInterval(save_grive_file, SAVE_INTERVAL);
+		}
+	});
+}
+
+function alert_error(error){
+	alert(error);
+	page = example_page;
+	populate();
 }
 
 function download_file(file, callback) {
@@ -131,6 +146,7 @@ function download_file(file, callback) {
 }
 
 function save_grive_file() {
+
 	// request parameters
 	if(file == null){
 		checkAuth();
@@ -141,11 +157,6 @@ function save_grive_file() {
 		return;
 	}
 	changes = false;
-
-	//console.log("_____________________");
-	//console.log("file: " + sizeOf(file));
-	//console.log("page: " + sizeOf(page));
-
 
 	var file_parts = [JSON.stringify(page)];
 	var blob = new Blob(file_parts, {type : 'text/plain'});
@@ -181,7 +192,10 @@ function save_grive_file() {
 			'body': multipartRequestBody
 		});
 
-		request.execute(update_success);
+		request.execute(function(result){
+			lastSaveDate = new Date();
+			setSaveText();
+		});
 	}
 }
 
@@ -226,29 +240,9 @@ function add_grive_file() {
 		});
 
 		// execute the request
-		request.execute(add_success);
+		request.execute(function(response){
+			console.log(response);
+			file = response;
+		});
 	}
 }
-
-function update_success(result){
-	console.log("saved");
-	lastSaveDate = new Date();
-	setSaveText();
-}
-
-function save_success(){
-	//alert("File saved");
-}
-
-function add_success(response){
-	file = response;
-}
-
-// Might use this as a uploader for text files you want to bring in
-function uploadFile(evt) {
-	gapi.client.load('drive', 'v2', function() {
-		// var file = File object;
-		// insertFile(file);
-	});
-}
-

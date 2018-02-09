@@ -10,15 +10,20 @@ var focus;
 var history;
 
 $(window).load(function(){
-	add_hotkey_html();
+
+	if($(window).width() > 1000){
+		add_hotkey_html();
+	}
+
+	if(jQuery.isReady){
+		checkAuth(init);
+	}
+
 })
 
 // wait for window so the google auth doesn't fail
 function start(){
-	if(jQuery.isReady){
-	    checkAuth();
-		init();
-	}
+
 }
 
 function Liner(text, depth){
@@ -108,6 +113,7 @@ function populate(){
 
 function update(){
 	page[getFocusId()].stuff = $(this).val();
+	history_text_edit(getFocusId());
 }
 
 function add_line(){
@@ -141,11 +147,14 @@ function delete_line(){
 
 	// remove line and set index to above line
 	page.splice(index, 1);
-	index--;
 
-	//update above line with new text
-	var new_car_pos = page[index].stuff.length;
-	page[index].stuff += new_text;
+	if(index > 0){
+		index--;
+
+		//update above line with new text
+		var new_car_pos = page[index].stuff.length;
+		page[index].stuff += new_text;
+	}
 
 	populate();
 	
@@ -191,7 +200,7 @@ function toggleCollapse(index){
 	index++;
 	while(depth < page[index].depth){
 		var element = $("#" + index);
-		if(!truth){
+		if(truth){
 			element.hide();
 		}else{
 			element.show();
@@ -213,35 +222,32 @@ function update_selection(){
 }
 
 function nextAtCurDepth(direction){
-	console.log("next cur");
+	console.log("next cur depth");
 	var index = getFocusId();
 	var depth = page[index].depth;
 
-	if(direction == "up")
-		index--;
-	else
-		index++;
-
-	while(depth < page[index].depth){
-		console.log(index, depth);
+	while(true){
 		if(direction == "up")
 			index--;
 		else
 			index++;
+
+		if(depth === page[index].depth){
+			break;
+		}
 	}
-	focus = $("#" + index);
-	focus.focus();
+
+	focus = $("#" + index).focus();
 }
 
 function next(direction){
 	console.log("next");
 	var index = getFocusId();
-	if(direction == "left")
+	if(direction == "up" && index > 0){
 		index--;
-	else
+	}else if(direction == "down" && index < page.length - 1)
 		index++;
-	focus = $("#" + index);
-	focus.focus();
+	focus = $("#" + index).focus();
 }
 
 function message(message){
