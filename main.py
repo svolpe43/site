@@ -77,7 +77,7 @@ def deltav(filename):
 '''
 @route('/projects/planets')
 def planets():
-    return template('main', page='projects/planets')
+    return static_file('index.html', root='projects/planets/')
 @route('/projects/planets/step')
 def planets_step():
     return get_next(request.query.last)
