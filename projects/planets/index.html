@@ -7,6 +7,8 @@
 
 		<link rel="shortcut icon" type="image/ico" href="/favicon.png" />
 
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
 		<title>Planets API</title>
 		
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -18,10 +20,17 @@
 		<script src="/projects/planets/js/planets-3.js"></script>
 		<script src="/projects/planets/js/planets-ui.js"></script>
 		<script type="text/javascript" src="/projects/planets/js/dat.gui.min.js"></script>
-		<script src="/projects/planets/js/inner_solar_system_data.js"></script>
+		<!--<script src="/projects/planets/js/inner_solar_system_data.js"></script>-->
 
 		<link href="/projects/planets/css/planets.css" rel="stylesheet"/>
 	</head>
 	<body>
+		<div id="progress-wrapper">
+			<p id="progress-message">Loading 60 decades of inner planet position data.</p>
+			<div id="progress-container">
+				<div id="progress"></div>
+			</div>
+        </div>
+		<div id="threejs"></div>
 	</body>
 </html>

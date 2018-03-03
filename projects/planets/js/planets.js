@@ -16,6 +16,13 @@ var ui, planets3js;
 var last_update = 0;
 
 $(document).ready(function(){
+	load_data();
+});
+
+function start(){
+
+	$('#threejs').show();
+	$('#progress-wrapper').hide();
 
 	for(var i = 0; i < orbit_data.vectors.length; i++){
 		console.log(orbit_data.vectors[i].name, orbit_data.vectors[i].orbit.length, 'days');
@@ -23,7 +30,31 @@ $(document).ready(function(){
 
 	init();
 	animate();
-});
+}
+
+function update_progress(decimal){
+	var percent = decimal * 100;
+    $('#progress').width(percent + '%');
+    $('#progress-message').text('Loading 60 decades of inner planet position data. ' + Math.floor(percent) + '%');
+}
+
+function load_data(){
+
+    $.ajax ({
+        url : 'planets/js/inner_solar_system_data.js',
+        xhr: function() {
+            var xhr = new window.XMLHttpRequest();
+            xhr.addEventListener("progress", function(evt){
+               if (evt.lengthComputable) {
+                   update_progress(evt.loaded / evt.total);
+               }
+            }, false);
+
+           return xhr;
+        },
+        success : start
+    });
+}
 
 function init(){
 

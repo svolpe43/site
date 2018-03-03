@@ -98,12 +98,8 @@ def get_next(last):
 	# the last set of data
 	data = json.loads(last)
 
-	print data
-
 	bodies = []
 	for obj in data:
-
-		print obj
 
 		body = Body()
 		body.name = obj[u'name']

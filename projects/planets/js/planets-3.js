@@ -91,13 +91,15 @@ function init_scene() {
 	});
 
 	// add renderer
+	var threejs_element = $('#threejs');
+	console.log(threejs_element);
 	renderer = new THREE.WebGLRenderer( { antialias: true } );
 	renderer.setSize( window.innerWidth, window.innerHeight );
-	document.body.appendChild( renderer.domElement );
+	threejs_element.append(renderer.domElement);
 
 	// add live statistics
 	stats = new Stats();
-	document.body.appendChild(stats.dom);
+	threejs_element.append(stats.dom);
 
 	// resize when window resizes
 	window.addEventListener( 'resize', resize_window, false );
