@@ -1,7 +1,8 @@
 
 
 var gui;
-var day_controller, month_controller, year_controller, date_controller;
+var date_picker_folder;
+var current_controller, day_controller, month_controller, year_controller, date_controller;
 
 var months = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
 
@@ -64,11 +65,19 @@ UI.prototype.update_by_index = function(index){
 }
 
 UI.prototype.update_all = function(index, date){
-	this.Date = date.join('-');
+
+	var date_str = date.join('-');
+
+	this.Date = date_str;
 	this.Day = date[0];
 	this.Month = date[1];
 	this.Year = date[2];
 	this.index = index;
+	this.Current = date_str;
+
+	if(current_controller){
+		current_controller.setValue(date_str);
+	}
 }
 
 UI.prototype.increment_index = function(is_up){
@@ -90,6 +99,8 @@ function convert_date(date){
 function init_controls(ui) {
 	gui = new dat.GUI();
 
+	current_controller = gui.add(ui, 'Current');
+
 	gui.add(ui, 'Start');
 	gui.add(ui, 'Stop');
 
@@ -97,44 +108,47 @@ function init_controls(ui) {
 	// set to 70 sto make sure it doesn't max out
 	gui.add(ui, 'Speed', 0, 70, 1);
 
-	date_controller = gui.add(ui, 'Date').onChange(function(string){
+	date_picker_folder = gui.addFolder('Date Chooser');
+
+	date_controller = date_picker_folder.add(ui, 'Date').onChange(function(string){
 		ui.update_by_date(string.split('-').map(Number));
 		ui.date_change_handler();
 	});
 
-	year_controller = gui.add(ui, 'Year', 1980, 2040, 1).onChange(function(){
+	year_controller = date_picker_folder.add(ui, 'Year', 1980, 2040, 1).onChange(function(){
 		ui.update_by_date([ui.Day, ui.Month, ui.Year]);
 		ui.date_change_handler();
 	});
 
-	month_controller = gui.add(ui, 'Month', 1, 12, 1).onChange(function(){
+	month_controller = date_picker_folder.add(ui, 'Month', 1, 12, 1).onChange(function(){
 		update_number_of_days();
 		ui.update_by_date([ui.Day, ui.Month, ui.Year]);
 		ui.date_change_handler();
 	});
 
-	day_controller = gui.add(ui, 'Day', 1, 31, 1).onChange(function(){
+	day_controller = date_picker_folder.add(ui, 'Day', 1, 31, 1).onChange(function(){
 		ui.update_by_date([ui.Day, ui.Month, ui.Year]);
 		ui.date_change_handler();
 	});
+
+	date_picker_folder.open();
 }
 
 function update_number_of_days(){
 
-	console.log(ui.Month - 1);
-
 	var max_days = months[ui.Month - 1];
 
-	console.log(ui.Day, max_days, ui.Day > max_days);
-
-	gui.remove(day_controller);
+	date_picker_folder.remove(day_controller);
 
 	if(ui.Day > max_days){
 		ui.Day = max_days;
 	}
 
-	console.log('After', ui.Day)
-	day_controller = gui.add(ui, 'Day', 1, max_days, 1);
+	day_controller = date_picker_folder.add(ui, 'Day', 1, max_days, 1).onChange(function(){
+		console.log([ui.Day, ui.Month, ui.Year]);
+		ui.update_by_date([ui.Day, ui.Month, ui.Year]);
+		ui.date_change_handler();
+	});
 }
 
 function index_to_date(index){
