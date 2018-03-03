@@ -92,7 +92,6 @@ function init_scene() {
 
 	// add renderer
 	var threejs_element = $('#threejs');
-	console.log(threejs_element);
 	renderer = new THREE.WebGLRenderer( { antialias: true } );
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	threejs_element.append(renderer.domElement);

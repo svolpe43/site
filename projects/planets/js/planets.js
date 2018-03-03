@@ -39,15 +39,14 @@ function update_progress(decimal){
 }
 
 function load_data(){
-
     $.ajax ({
         url : 'planets/js/inner_solar_system_data.js',
         xhr: function() {
             var xhr = new window.XMLHttpRequest();
             xhr.addEventListener("progress", function(evt){
-               if (evt.lengthComputable) {
-                   update_progress(evt.loaded / evt.total);
-               }
+				if (evt.lengthComputable) {
+					update_progress(evt.loaded / evt.total);
+				}
             }, false);
 
            return xhr;
