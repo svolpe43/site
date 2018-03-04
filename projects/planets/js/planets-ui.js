@@ -14,7 +14,7 @@ function UI(_date_change_handler) {
 
 	this.Speed = 70;
 	this.run = true;
-	this.earth_mars = true;
+	this.earth_mars = false;
 
 	init_controls(this);
 
