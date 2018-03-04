@@ -1,6 +1,6 @@
 
 var camera, scene, renderer, controls, stats, texture_loader;	
-var meshes = [];
+var meshes = {};
 
 var planet_mesh_config = [
 	{
@@ -51,6 +51,21 @@ Planets3js.prototype.update_meshes = function(){
 	if(ui){
 		update_mesh_positions(ui.index);
 	}
+}
+
+//2) = √(x2 − x1)2 + (y2 − y1)2 + (z2 − z1)2
+Planets3js.prototype.mars_earth_distance = function(){
+	if(meshes_are_loaded()){
+
+		var mars = meshes['Mars'].position;
+		var earth = meshes['Earth'].position;
+
+		var dx = mars.x - earth.x;
+		var dy = mars.y - earth.y;
+		var dz = mars.z - earth.z;
+		return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2) + Math.pow(dz, 2));
+	}
+	return 2147483647;
 }
 
 function render(){
@@ -148,9 +163,12 @@ function resize_window() {
 	render();
 }
 
+function meshes_are_loaded(){
+	return (Object.keys(meshes).length === planet_mesh_config.length);
+}
+
 function update_mesh_positions(index){
-	// dont update position if we haven't loaded all meshes yet
-	if(Object.keys(meshes).length === planet_mesh_config.length){
+	if(meshes_are_loaded()){
 		// loop over planets updating the position of the mesh
 		for(var i = 0; i < orbit_data.vectors.length; i++){
 			planet = orbit_data.vectors[i];

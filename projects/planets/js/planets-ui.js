@@ -14,6 +14,7 @@ function UI(_date_change_handler) {
 
 	this.Speed = 70;
 	this.run = true;
+	this.earth_mars = true;
 
 	init_controls(this);
 
@@ -132,6 +133,9 @@ function init_controls(ui) {
 	});
 
 	date_picker_folder.open();
+
+	gui.addFolder('Stop on Closest Fly By');
+	gui.add(ui, 'earth_mars');
 }
 
 function update_number_of_days(){

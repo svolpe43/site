@@ -13,7 +13,12 @@ const AU = (149.6e6 * 1000)
 
 var ui, planets3js;
 
+// for speed control
 var last_update = 0;
+
+// for closest distance calculations
+var last_mars_earth_distance = 2147483647;
+var going_up = false;
 
 $(document).ready(function(){
 	load_data();
@@ -82,6 +87,25 @@ function animate() {
 		ui.increment_index(true);
 
 		planets3js.update_meshes();
+
+		stop_on_earth_mars_closest();
 	}
 	planets3js.render();
+}
+
+function stop_on_earth_mars_closest(){
+	var mars_earth_distance = planets3js.mars_earth_distance();
+
+	if(!going_up && last_mars_earth_distance < mars_earth_distance){
+
+		if(ui.earth_mars){
+			ui.run = false;
+		}
+
+		going_up = true;
+	}else if(going_up && last_mars_earth_distance > mars_earth_distance){
+		going_up = false;
+	}
+
+	last_mars_earth_distance = mars_earth_distance;
 }
