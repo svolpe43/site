@@ -1,7 +1,7 @@
 
 var camera, scene, renderer, controls, stats, texture_loader;	
 var meshes = {};
-var solar_system_plane_mesh;
+var solar_system_plane_mesh, orbit_mesh;
 
 var planet_mesh_config = [
 	{
@@ -82,6 +82,30 @@ Planets3js.prototype.toggle_solar_system_plane = function(show){
 		scene.add(solar_system_plane_mesh);
 	}else{
 		scene.remove(solar_system_plane_mesh);
+	}
+}
+
+Planets3js.prototype.update_orbit = function(e){
+
+	scene.remove(orbit_mesh);
+
+	if(ui.orbit.show){
+		var curve = new THREE.EllipseCurve(
+			ui.orbit.x_center,  ui.orbit.y_center,
+			ui.orbit.x_radius, ui.orbit.y_radius,
+			0,  2 * Math.PI,
+			false,
+			ui.orbit.rotation
+		);
+
+		var points = curve.getPoints( 100 );
+		var geometry = new THREE.BufferGeometry().setFromPoints( points );
+
+		var material = new THREE.LineBasicMaterial( { color : 0xffffff } );
+
+		// Create the final object to add to the scene
+		orbit_mesh = new THREE.Line( geometry, material );
+		scene.add(orbit_mesh);
 	}
 }
 
@@ -170,25 +194,6 @@ function add_planets(index){
 
 		add_planets(index + 1);
 	});
-}
-
-function add_orbit(){
-	var curve = new THREE.EllipseCurve(
-		0,  0,            // ax, aY
-		1000, 1000,           // xRadius, yRadius
-		0,  2 * Math.PI,  // aStartAngle, aEndAngle
-		false,            // aClockwise
-		0                 // aRotation
-	);
-
-	var points = curve.getPoints( 50 );
-	var geometry = new THREE.BufferGeometry().setFromPoints( points );
-
-	var material = new THREE.LineBasicMaterial( { color : 0xffffff } );
-
-	// Create the final object to add to the scene
-	var ellipse = new THREE.Line( geometry, material );
-	scene.add(ellipse);
 }
 
 function resize_window() {

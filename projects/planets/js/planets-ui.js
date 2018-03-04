@@ -16,6 +16,15 @@ function UI(_date_change_handler) {
 
 	this.run = true;
 
+	this.orbit = {
+		show: false,
+		x_center: 0,
+		y_center: 0,
+		x_radius: 500,
+		y_radius: 800,
+		rotation: Math.PI / 2
+	};
+
 	// show closest point
 	this.stop_on_earth_mars_flyby = false;
 
@@ -63,6 +72,8 @@ UI.prototype.update_by_date = function(date){
 UI.prototype.update_by_index = function(index){
 	if(index !== null){
 		var date = index_to_date(index);
+
+		date[1] += 1; // 1 index the month
 
 		if(date){
 			this.update_all(index, date);
@@ -139,6 +150,15 @@ function init_controls(ui) {
 
 	date_picker_folder.open();
 
+	var orbit_folder = gui.addFolder('Orbit Calculator');
+	orbit_folder.add(ui.orbit, 'show').onChange(orbit_change).name('Show');
+	orbit_folder.add(ui.orbit, 'x_center', 0, 2500, 1).onChange(orbit_change).name('X Center');
+	orbit_folder.add(ui.orbit, 'y_center', 0, 2500, 1).onChange(orbit_change).name('Y Center');
+	orbit_folder.add(ui.orbit, 'x_radius', 100, 5000, 1).onChange(orbit_change).name('X Radius');
+	orbit_folder.add(ui.orbit, 'y_radius', 100, 5000, 1).onChange(orbit_change).name('Y Radius');
+	orbit_folder.add(ui.orbit, 'rotation', 0, 2 * Math.PI).onChange(orbit_change).name('Rotation (rad)');
+	orbit_folder.open();
+
 	var fly_by_folder = gui.addFolder('Stop on Closest Fly By');
 	fly_by_folder.add(ui, 'stop_on_earth_mars_flyby').name('Earth - Mars');
 	fly_by_folder.open();
@@ -150,7 +170,12 @@ function init_controls(ui) {
 		}
 	}).name('Show');
 	solar_system_plane_folder.open();
+}
 
+function orbit_change(e){
+	if(planets3js){
+		planets3js.update_orbit(e);
+	}
 }
 
 function update_number_of_days(){
