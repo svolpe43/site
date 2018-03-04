@@ -73,7 +73,7 @@ function init(){
 function animate() {
 
 	// todo: animate as fast as possible but slow the update position
-	var threshold = (ui.Speed === 0) ? 2147483647 : 1000 / ui.Speed;
+	var threshold = (ui.speed === 0) ? 2147483647 : 1000 / ui.speed;
 
 	requestAnimationFrame(animate);
 
@@ -98,7 +98,7 @@ function stop_on_earth_mars_closest(){
 
 	if(!going_up && last_mars_earth_distance < mars_earth_distance){
 
-		if(ui.earth_mars){
+		if(ui.stop_on_earth_mars_flyby){
 			ui.run = false;
 		}
 

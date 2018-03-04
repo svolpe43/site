@@ -12,9 +12,14 @@ function UI(_date_change_handler) {
 
 	this.update_by_date(convert_date(new Date()));
 
-	this.Speed = 70;
+	this.speed = 70;
+
 	this.run = true;
-	this.earth_mars = false;
+
+	// show closest point
+	this.stop_on_earth_mars_flyby = false;
+
+	this.show_solar_system_plane = false;
 
 	init_controls(this);
 
@@ -107,7 +112,7 @@ function init_controls(ui) {
 
 	// limited by webgl, max is 60 until we frame skip
 	// set to 70 sto make sure it doesn't max out
-	gui.add(ui, 'Speed', 0, 70, 1);
+	gui.add(ui, 'speed', 0, 70, 1).name('Speed (day/sec)');
 
 	date_picker_folder = gui.addFolder('Date Chooser');
 
@@ -134,8 +139,18 @@ function init_controls(ui) {
 
 	date_picker_folder.open();
 
-	gui.addFolder('Stop on Closest Fly By');
-	gui.add(ui, 'earth_mars');
+	var fly_by_folder = gui.addFolder('Stop on Closest Fly By');
+	fly_by_folder.add(ui, 'stop_on_earth_mars_flyby').name('Earth - Mars');
+	fly_by_folder.open();
+
+	var solar_system_plane_folder = gui.addFolder('Show Solar System Plane');
+	solar_system_plane_folder.add(ui, 'show_solar_system_plane').onChange(function(e){
+		if(planets3js){
+			planets3js.toggle_solar_system_plane(e);
+		}
+	}).name('Show');
+	solar_system_plane_folder.open();
+
 }
 
 function update_number_of_days(){

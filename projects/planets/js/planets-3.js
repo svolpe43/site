@@ -1,6 +1,7 @@
 
 var camera, scene, renderer, controls, stats, texture_loader;	
 var meshes = {};
+var solar_system_plane_mesh;
 
 var planet_mesh_config = [
 	{
@@ -66,6 +67,22 @@ Planets3js.prototype.mars_earth_distance = function(){
 		return Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2) + Math.pow(dz, 2));
 	}
 	return 2147483647;
+}
+
+Planets3js.prototype.toggle_solar_system_plane = function(show){
+	if(show){
+		var geometry = new THREE.CircleGeometry( 2000, 32 );
+		var material = new THREE.MeshLambertMaterial({
+			color: 0x42f46b,
+			transparent: true,
+			opacity: 0.25,
+			side: THREE.DoubleSide
+		});
+		solar_system_plane_mesh = new THREE.Mesh( geometry, material );
+		scene.add(solar_system_plane_mesh);
+	}else{
+		scene.remove(solar_system_plane_mesh);
+	}
 }
 
 function render(){
@@ -155,6 +172,25 @@ function add_planets(index){
 	});
 }
 
+function add_orbit(){
+	var curve = new THREE.EllipseCurve(
+		0,  0,            // ax, aY
+		1000, 1000,           // xRadius, yRadius
+		0,  2 * Math.PI,  // aStartAngle, aEndAngle
+		false,            // aClockwise
+		0                 // aRotation
+	);
+
+	var points = curve.getPoints( 50 );
+	var geometry = new THREE.BufferGeometry().setFromPoints( points );
+
+	var material = new THREE.LineBasicMaterial( { color : 0xffffff } );
+
+	// Create the final object to add to the scene
+	var ellipse = new THREE.Line( geometry, material );
+	scene.add(ellipse);
+}
+
 function resize_window() {
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
@@ -172,7 +208,6 @@ function update_mesh_positions(index){
 		// loop over planets updating the position of the mesh
 		for(var i = 0; i < orbit_data.vectors.length; i++){
 			planet = orbit_data.vectors[i];
-
 			// mesh distances in milli AU
 			meshes[planet.name].position.x = (planet.orbit[index].p[0]) * 1000;
 			meshes[planet.name].position.y = (planet.orbit[index].p[1]) * 1000;
