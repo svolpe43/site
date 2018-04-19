@@ -37,7 +37,7 @@ def cfsh():
     return template('main', page='cfsh')
 @route('/cfsh/img/<filename:path>')
 def cfsh(filename):
-    return static_file(filename, root='cfsh/img/')
+    return static_file(filename, root='img/cfsh/')
 @route('/cfsh/<filename:path>')
 def cfsh(filename):
     return static_file(filename, root='cfsh/')
