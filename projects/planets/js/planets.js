@@ -1,17 +1,13 @@
 
 /*
-	TODO
-	- New features
-		- orbit visualizer, add orbit parameters to controls and show line
-		- mars proximity finder, run through the time until you get a mars closest point
-		- Add a planet real scale toggle
-		- camera go to x, y z axis
+	Bugs
+		- Orbit planet selector slow when choosing
+		- Orbit slow to update during orbital element changes
+		- Planet orbits not accurate to the planet orbit animations
+		- Time is off by a factor of 10
 */
 
-// 149.6 million km, in meters.
-const AU = (149.6e6 * 1000)
-
-var ui, planets3js;
+var ui, planets3js, astro;
 
 // for speed control
 var last_update = 0;
@@ -30,6 +26,15 @@ function start(){
 	$('#progress-wrapper').hide();
 
 	for(var i = 0; i < orbit_data.vectors.length; i++){
+
+		var years = {
+			'Mercury': 88,
+			'Venus': 225,
+			'Earth': 366,
+			'Mars': 688
+		};
+
+		orbit_data.vectors[i].orbit_duration = years[orbit_data.vectors[i].name];
 		console.log(orbit_data.vectors[i].name, orbit_data.vectors[i].orbit.length, 'days');
 	}
 
@@ -62,34 +67,37 @@ function load_data(){
 
 function init(){
 
+	astro = new Astro();
 	planets3js = new Planets3js();
 
 	ui = new UI(function(){
 		planets3js.update_meshes();
 		planets3js.render();
 	});
+
+	planets3js.calculate_orbit();
 }
 
 function animate() {
 
-	// todo: animate as fast as possible but slow the update position
+	// animate as fast as possible but slow the update position
 	var threshold = (ui.speed === 0) ? 2147483647 : 1000 / ui.speed;
 
 	requestAnimationFrame(animate);
 
-	controls.update();
-
-	var now = new Date();
-
+	var now = Date.now();
 	if(ui.run && (now - last_update) > threshold){
-		last_update = new Date();
-
+		last_update = Date.now();
 		ui.increment_index(true);
-
 		planets3js.update_meshes();
-
+		planets3js.increment_orbit();
 		stop_on_earth_mars_closest();
+	}else{
+		if(controls){
+			controls.update();
+		}
 	}
+
 	planets3js.render();
 }
 

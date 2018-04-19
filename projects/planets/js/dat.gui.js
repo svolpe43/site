@@ -1114,6 +1114,46 @@ var NumberController = function (_Controller) {
   return NumberController;
 }(Controller);
 
+var MessageController = function (_Controller) {
+  inherits(MessageController, _Controller);
+  function MessageController(object, property) {
+    classCallCheck(this, MessageController);
+    var _this2 = possibleConstructorReturn(this, (MessageController.__proto__ || Object.getPrototypeOf(MessageController)).call(this, object, property));
+    var _this = _this2;
+
+    _this2.__prev = _this2.getValue();
+    _this2.__paragraph = document.createElement('p');
+    var text_element = document.createTextNode(_this2.__prev);
+    _this2.__paragraph.appendChild(text_element);
+
+    _this2.updateDisplay();
+    _this2.domElement.appendChild(_this2.__paragraph);
+    return _this2;
+  }
+
+  createClass(MessageController, [{
+    key: 'setValue',
+    value: function setValue(v) {
+      var toReturn = get(MessageController.prototype.__proto__ || Object.getPrototypeOf(MessageController.prototype), 'setValue', this).call(this, v);
+      if (this.__onFinishChange) {
+        this.__onFinishChange.call(this, this.getValue());
+      }
+      this.__prev = this.getValue();
+      return toReturn;
+    }
+  }, {
+    key: 'updateDisplay',
+    value: function updateDisplay() {
+      var val = this.getValue();
+      this.__paragraph.innerHTML = val;
+      this.__prev = val;
+      return get(MessageController.prototype.__proto__ || Object.getPrototypeOf(MessageController.prototype), 'updateDisplay', this).call(this);
+    }
+  }]);
+
+  return MessageController;
+}(Controller);
+
 function roundToDecimal(value, decimals) {
   var tenTo = Math.pow(10, decimals);
   return Math.round(value * tenTo) / tenTo;
@@ -1578,6 +1618,9 @@ var ControllerFactory = function ControllerFactory(object, property) {
     return new NumberControllerBox(object, property, { min: arguments[2], max: arguments[3] });
   }
   if (Common.isString(initialValue)) {
+    if (arguments[2]) {
+      return new MessageController(object, property);
+    }
     return new StringController(object, property);
   }
   if (Common.isFunction(initialValue)) {

@@ -26,3 +26,7 @@ body {
 	background-color: #4286f4;
 	border-radius: 4px;
 }
+
+select {
+	color: #000;
+}

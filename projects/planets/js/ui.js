@@ -1,10 +1,12 @@
 
-
 var gui;
 var date_picker_folder;
 var current_controller, day_controller, month_controller, year_controller, date_controller;
+var orbit_controllers = {};
 
 var months = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+var month_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'Novemebr', 'December'];
+var bodies = ['Sun', 'Mercury', 'Venus', 'Earth', 'Mars'];
 
 function UI(_date_change_handler) {
 
@@ -12,23 +14,37 @@ function UI(_date_change_handler) {
 
 	this.update_by_date(convert_date(new Date()));
 
-	this.speed = 70;
+	this.speed = 30;
 
 	this.run = true;
 
 	this.orbit = {
 		show: false,
-		x_center: 0,
-		y_center: 0,
-		x_radius: 500,
-		y_radius: 800,
-		rotation: Math.PI / 2
+		run: false,
+		index: 0,
+		reset : reset_orbit,
+		body: 'Earth',
+		a: 1 * 1000,
+		e: 0.01671022,
+		i: 0.00005,
+		ap: -11.26064,
+		lan: 102.94719,
+		By_Orbital_Elements: 0,
+		By_Launch_Placement: 0,
+		Radius: '',
+		Velocity: '',
+		Zenith: '',
+
+		// for labels
+		'1': '',
+		'2': ''
 	};
 
-	// show closest point
+	this.camera_focus = 'Sun';
 	this.stop_on_earth_mars_flyby = false;
-
 	this.show_solar_system_plane = false;
+	this.plot_planet_orbits = false;
+	this.actual_planet_sizes = false;
 
 	init_controls(this);
 
@@ -42,26 +58,19 @@ function UI(_date_change_handler) {
 };
 
 UI.prototype.Start = function(){
-	this.run = true;
+	if(!this.run){
+		this.run = true;
+	}
 }
 
 UI.prototype.Stop = function(){
 	this.run = false;
 }
 
-// Not Used: Doing any of these updates causes circular updates and max call stack error
-UI.prototype.render = function(){
-	date_controller.setValue([this.Day, this.Month, this.Year].join('-'));
-	day_controller.setValue(this.Day);
-	month_controller.setValue(this.Month);
-	year_controller.setValue(this.Year);
-}
-
 // call when any of the date controls changes
 UI.prototype.update_by_date = function(date){
 	if(date){
 		var index = date_to_index(date);
-
 		if(index){
 			this.update_all(index, date);
 		}
@@ -93,7 +102,7 @@ UI.prototype.update_all = function(index, date){
 	this.Current = date_str;
 
 	if(current_controller){
-		current_controller.setValue(date_str);
+		current_controller.setValue(month_names[this.Month - 1] + ' ' + this.Day + ',' + this.Year);
 	}
 }
 
@@ -109,14 +118,20 @@ UI.prototype.increment_index = function(is_up){
 	}
 }
 
+UI.prototype.update_orbit_state_vectors = function(orbit_vertex){
+	orbit_controllers['r'].setValue(round(orbit_vertex.state[0], 3) + ' mAu');
+	orbit_controllers['v'].setValue(round(orbit_vertex.state[1], 3) + ' km/s');
+	orbit_controllers['z'].setValue(round(orbit_vertex.state[2], 3) + ' deg');
+}
+
 function convert_date(date){
 	return [date.getUTCDate(), date.getUTCMonth(), date.getUTCFullYear()];
 }
 
 function init_controls(ui) {
-	gui = new dat.GUI();
+	gui = new dat.GUI({width: 300});
 
-	current_controller = gui.add(ui, 'Current');
+	current_controller = gui.add(ui, 'Current', true);
 
 	gui.add(ui, 'Start');
 	gui.add(ui, 'Stop');
@@ -124,6 +139,12 @@ function init_controls(ui) {
 	// limited by webgl, max is 60 until we frame skip
 	// set to 70 sto make sure it doesn't max out
 	gui.add(ui, 'speed', 0, 70, 1).name('Speed (day/sec)');
+
+	gui.add(ui, 'camera_focus', bodies).onChange(function(body){
+		if(planets3js && !ui.run){
+			planets3js.set_camera_focus(body);
+		}
+	}).name('Camera Focus');
 
 	date_picker_folder = gui.addFolder('Date Chooser');
 
@@ -151,12 +172,21 @@ function init_controls(ui) {
 	date_picker_folder.open();
 
 	var orbit_folder = gui.addFolder('Orbit Calculator');
-	orbit_folder.add(ui.orbit, 'show').onChange(orbit_change).name('Show');
-	orbit_folder.add(ui.orbit, 'x_center', 0, 2500, 1).onChange(orbit_change).name('X Center');
-	orbit_folder.add(ui.orbit, 'y_center', 0, 2500, 1).onChange(orbit_change).name('Y Center');
-	orbit_folder.add(ui.orbit, 'x_radius', 100, 5000, 1).onChange(orbit_change).name('X Radius');
-	orbit_folder.add(ui.orbit, 'y_radius', 100, 5000, 1).onChange(orbit_change).name('Y Radius');
-	orbit_folder.add(ui.orbit, 'rotation', 0, 2 * Math.PI).onChange(orbit_change).name('Rotation (rad)');
+	orbit_controllers['show'] = orbit_folder.add(ui.orbit, 'show').onChange(orbit_change).name('Show');
+	orbit_controllers['run'] = orbit_folder.add(ui.orbit, 'run').onChange(play_orbit).name('Run');
+
+	var objects = ['Mercury', 'Venus', 'Earth', 'Mars'];
+	orbit_controllers['body'] = orbit_folder.add(ui.orbit, 'body', bodies).onChange(set_orbit).name('Body');
+	orbit_folder.add(ui.orbit, '2', true).setValue('State Vectors');
+	orbit_controllers['r'] = orbit_folder.add(ui.orbit, 'Radius', true);
+	orbit_controllers['v'] = orbit_folder.add(ui.orbit, 'Velocity', true);
+	orbit_controllers['z'] = orbit_folder.add(ui.orbit, 'Zenith', true);
+	orbit_folder.add(ui.orbit, '1', true).setValue('Orbital Elements');
+	orbit_controllers['a'] = orbit_folder.add(ui.orbit, 'a', 0, 2000, 10).onChange(orbit_change).name('Semi-Major Axis');
+	orbit_controllers['e'] = orbit_folder.add(ui.orbit, 'e', 0, 1, 0.01).onChange(orbit_change).name('Eccentricity');
+	orbit_controllers['i'] = orbit_folder.add(ui.orbit, 'i', 0, 360, 1).onChange(orbit_change).name('Inclination');
+	orbit_controllers['ap'] = orbit_folder.add(ui.orbit, 'ap', 0, 360, 1).onChange(orbit_change).name('Argument of Periapsis');
+	orbit_controllers['lan'] = orbit_folder.add(ui.orbit, 'lan', 0, 360, 1).onChange(orbit_change).name('Long. Ascending Node');
 	orbit_folder.open();
 
 	var fly_by_folder = gui.addFolder('Stop on Closest Fly By');
@@ -170,12 +200,54 @@ function init_controls(ui) {
 		}
 	}).name('Show');
 	solar_system_plane_folder.open();
+
+	var orbit_plots_folder = gui.addFolder('Plot Planet Orbits');
+	orbit_plots_folder.add(ui, 'plot_planet_orbits').onChange(function(e){
+		if(planets3js){
+			planets3js.toggle_plot_planet_orbits(e);
+		}
+	}).name('Show');
+	orbit_plots_folder.open();
+
+	var actual_planet_size_folder = gui.addFolder('Enable Accurate Planet Size Ratios');
+	actual_planet_size_folder.add(ui, 'actual_planet_sizes').onChange(function(e){
+		if(planets3js){
+			planets3js.toggle_actual_planet_sizes(e);
+		}
+	}).name('On');
+	actual_planet_size_folder.open();
 }
 
-function orbit_change(e){
+function set_orbit(body){
+	var show = ui.orbit.show;
+	var ele = astro.get_orbital_elements(body);
+	orbit_controllers['a'].setValue(ele.a);
+	orbit_controllers['e'].setValue(ele.e);
+	orbit_controllers['i'].setValue(ele.i);
+	orbit_controllers['ap'].setValue(ele.ap);
+	orbit_controllers['lan'].setValue(ele.lan);
+	ui.orbit.show = show;
+	planets3js.calculate_orbit();
+	planets3js.draw_orbit();
+}
+
+function orbit_change(){
 	if(planets3js){
-		planets3js.update_orbit(e);
+		planets3js.calculate_orbit();
+		planets3js.draw_orbit();
 	}
+}
+
+function play_orbit(run){
+	if(run){
+		ui.orbit.index = 0;
+		planets3js.clear_orbit();
+	}
+}
+
+function reset_orbit(){
+	ui.orbit.index = 0;
+	planets3js.clear_orbit();
 }
 
 function update_number_of_days(){
@@ -209,8 +281,13 @@ function date_to_index(date){
 
 	var arr = orbit_data.dates;
 
+	if(!valid_date(date)){
+		return null;
+	}
+
 	// month is 0 indexed in Date input
 	var needle = new Date(date[2], date[1] - 1, date[0]);
+
 	var index = Math.floor(arr.length / 2);
 	var start = 0;
 	var end = arr.length;
@@ -233,8 +310,37 @@ function date_to_index(date){
 	}
 }
 
+function valid_date(date){
+	for(var i = 0; i < date.length; i ++){
+		if(date[i] < 1)
+			return false;
+	}
+
+	if(date[0] > months[date[1] - 1])
+		return false;
+
+	if(date[1] > 12)
+		return false;
+
+	if(date[2] < 1980 || date[2] > 2040)
+		return false;
+
+	return true;
+}
+
 function same_day(d1, d2){
 	return d1.getUTCFullYear() === d2.getUTCFullYear() &&
     d1.getUTCMonth() === d2.getUTCMonth() &&
     d1.getUTCDate() === d2.getUTCDate();
+}
+
+function round(number, precision) {
+	var shift = function (number, precision, reverse_shift) {
+		if (reverse_shift) {
+			precision = -precision;
+		}
+		var numArray = ('' + number).split('e');
+		return +(numArray[0] + 'e' + (numArray[1] ? (+numArray[1] + precision) : precision));
+	};
+	return shift(Math.round(shift(number, precision, false)), precision, true);
 }
