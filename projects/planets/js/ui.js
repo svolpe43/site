@@ -191,7 +191,6 @@ function init_controls(ui) {
 
 	var fly_by_folder = gui.addFolder('Stop on Closest Fly By');
 	fly_by_folder.add(ui, 'stop_on_earth_mars_flyby').name('Earth - Mars');
-	fly_by_folder.open();
 
 	var solar_system_plane_folder = gui.addFolder('Show Solar System Plane');
 	solar_system_plane_folder.add(ui, 'show_solar_system_plane').onChange(function(e){
@@ -199,7 +198,6 @@ function init_controls(ui) {
 			planets3js.toggle_solar_system_plane(e);
 		}
 	}).name('Show');
-	solar_system_plane_folder.open();
 
 	var orbit_plots_folder = gui.addFolder('Plot Planet Orbits');
 	orbit_plots_folder.add(ui, 'plot_planet_orbits').onChange(function(e){
@@ -207,7 +205,6 @@ function init_controls(ui) {
 			planets3js.toggle_plot_planet_orbits(e);
 		}
 	}).name('Show');
-	orbit_plots_folder.open();
 
 	var actual_planet_size_folder = gui.addFolder('Enable Accurate Planet Size Ratios');
 	actual_planet_size_folder.add(ui, 'actual_planet_sizes').onChange(function(e){
@@ -215,7 +212,6 @@ function init_controls(ui) {
 			planets3js.toggle_actual_planet_sizes(e);
 		}
 	}).name('On');
-	actual_planet_size_folder.open();
 }
 
 function set_orbit(body){
