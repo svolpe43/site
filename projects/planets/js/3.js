@@ -103,9 +103,9 @@ Planets3js.prototype.draw_orbit = function(){
 		for(var i = 0; i < orbit_vertices.length; i++){
 			var dot = new THREE.Mesh(geometry, material);
 			dot.position.set(
-				orbit_vertices[i].position[0],
-				orbit_vertices[i].position[1],
-				orbit_vertices[i].position[2]);
+			meshes[ui.orbit.center].position.x + orbit_vertices[i].position[0],
+			meshes[ui.orbit.center].position.y + orbit_vertices[i].position[1],
+			meshes[ui.orbit.center].position.z + orbit_vertices[i].position[2]);
 			scene.add(dot);
 			orbit_plot_dots.push(dot);
 		}
@@ -133,9 +133,9 @@ Planets3js.prototype.increment_orbit = function(){
 		var dot = new THREE.Mesh(geometry, material);
 
 		dot.position.set(
-			orbit_vertices[ui.orbit.index].position[0],
-			orbit_vertices[ui.orbit.index].position[1],
-			orbit_vertices[ui.orbit.index].position[2]);
+			meshes[ui.orbit.center].position.x + orbit_vertices[ui.orbit.index].position[0],
+			meshes[ui.orbit.center].position.y + orbit_vertices[ui.orbit.index].position[1],
+			meshes[ui.orbit.center].position.z + orbit_vertices[ui.orbit.index].position[2]);
 
 		scene.add(dot);
 		orbit_plot_dots.push(dot);

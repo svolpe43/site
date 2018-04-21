@@ -24,6 +24,7 @@ function UI(_date_change_handler) {
 		index: 0,
 		reset : reset_orbit,
 		body: 'Earth',
+		center: 'Sun',
 		a: 1 * 1000,
 		e: 0.01671022,
 		i: 0.00005,
@@ -119,7 +120,7 @@ UI.prototype.increment_index = function(is_up){
 }
 
 UI.prototype.update_orbit_state_vectors = function(orbit_vertex){
-	orbit_controllers['r'].setValue(round(orbit_vertex.state[0], 3) + ' mAu');
+	orbit_controllers['r'].setValue(round(orbit_vertex.state[0] / 149.6e9, 3) + ' Au');
 	orbit_controllers['v'].setValue(round(orbit_vertex.state[1], 3) + ' km/s');
 	orbit_controllers['z'].setValue(round(orbit_vertex.state[2], 3) + ' deg');
 }
@@ -176,7 +177,8 @@ function init_controls(ui) {
 	orbit_controllers['run'] = orbit_folder.add(ui.orbit, 'run').onChange(play_orbit).name('Run');
 
 	var objects = ['Mercury', 'Venus', 'Earth', 'Mars'];
-	orbit_controllers['body'] = orbit_folder.add(ui.orbit, 'body', bodies).onChange(set_orbit).name('Body');
+	orbit_controllers['body'] = orbit_folder.add(ui.orbit, 'body', objects).onChange(set_orbit).name('Set Orbital Elements');
+	orbit_controllers['center'] = orbit_folder.add(ui.orbit, 'center', bodies).onChange(set_orbit_center).name('Orbit Focus');
 	orbit_folder.add(ui.orbit, '2', true).setValue('State Vectors');
 	orbit_controllers['r'] = orbit_folder.add(ui.orbit, 'Radius', true);
 	orbit_controllers['v'] = orbit_folder.add(ui.orbit, 'Velocity', true);
@@ -225,6 +227,10 @@ function set_orbit(body){
 	ui.orbit.show = show;
 	planets3js.calculate_orbit();
 	planets3js.draw_orbit();
+}
+
+function set_orbit_center(){
+	planets3js.clear_orbit();
 }
 
 function orbit_change(){
