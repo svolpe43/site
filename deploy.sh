@@ -1,8 +1,8 @@
 #!/bin/bash
 
-rsync -avz --exclude '.git' ./ ubuntu@184.72.93.196:/home/ubuntu/site/
+rsync -avz --exclude '.git' ./ ubuntu@ec2-18-234-46-15.compute-1.amazonaws.com:/home/ubuntu/site/
 
-ssh ubuntu@184.72.93.196 << EOF
+ssh ubuntu@ec2-18-234-46-15.compute-1.amazonaws.com << EOF
 	sudo rm -rf /var/www/site/*
 	sudo cp -r /home/ubuntu/site/* /var/www/site/
 	sudo chown -R www-data:www-data /var/www/site

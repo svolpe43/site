@@ -14,7 +14,7 @@
       </div>
       <div id="blog" class="no-indent">
         <p>
-          After 2 years in Boston Jesse and I choose to move to Los Angeles. We bought a 4Runner and a box trailer and after 60 days and 10,036 miles we arrived in LA.
+          Bought a 4Runner and a box trailer and after 60 days and 10,036 miles we arrived in LA.
         </p>
 
         <h3>Route</h3>
@@ -78,7 +78,6 @@
           </tr>
         </table>
 
-        <h3>Where we slept.</h3>
         <img src="/limbo/img/night_dist.png" alt="night-distribution" height="400px">
 
         <h3>Major Cities Visited</h3>
@@ -87,22 +86,12 @@
         <p><strong>Cities: </strong>Buffalo, Detroit, Chicago, Minneapolis, Calgary, Vancouver, Seattle, Sacramento, San Fransisco, Salt Lake City, Pheonix, San Diego, Los Angeles</p>
 
         <div class="gallery">
-          <h3>The team.</h3>
-          <p>Missoula, Montana</p>
-          <img src="/limbo/img/team1.jpg" alt="night-distribution" width="100%">
 
-          <h3>The beloved rig.</h3>
+          <h3>The rig.</h3>
           <p>Teton National Park, Wyoming</p>
           <img src="/limbo/img/rig7.jpg" alt="night-distribution" width="100%">
 
-          <h3>The bed was nice and comfy.</h3>
-          <p>Down comforter, 4 down pillows and 1.5 inches of memory foam</p>
-          <img src="/limbo/img/bed.jpg" alt="night-distribution" width="100%">
-
-          <p>Very comfy.</p>
-          <img src="/limbo/img/bed1.jpg" alt="night-distribution" width="50%">
-
-          <h3>During the day we folded it up so it stayed as clean as possible.</h3>
+          <h3>During the day it was folded it up so it stayed as clean as possible.</h3>
           <p>We called it Kepler's throne.</p>
           <img src="/limbo/img/folded_bed.jpg" alt="night-distribution" width="100%">
 
@@ -110,25 +99,17 @@
           <p>Hamilton, Ontario</p>
           <img src="/limbo/img/trailer_org.jpg" alt="night-distribution" width="100%">
 
-          <h3>Then we used my dads idea to take some plywood and box it.</h3>
+          <h3>Then used my dads idea to take some plywood and box it.</h3>
           <p>Turned out really nice and compact. And it's very good for towing.</p>
           <img src="/limbo/img/trailer_org3.jpg" alt="night-distribution" width="100%">
 
-          <h3>Unfortunately, we had to do it in the rain.</h3>
+          <h3>Unfortunately, it rained a lot.</h3>
           <p>Glacier National Park, Montana</p>
           <img src="/limbo/img/trailer_org2.jpg" alt="night-distribution" width="100%">
 
-          <h3>The trailer had a little shower pump for showering and washing dishes.</h3>
-          <p>6 gallon tank, 25 W pump, 5 minutes of running water.</p>
-          <img src="/limbo/img/shower.jpg" alt="night-distribution" width="100%">
-
-          <h3>My favorite campsite. Taylor Lake, deep in the mountains of Banff.</h3>
+          <h3>One of my favorite campsites. Taylor Lake, deep in the mountains of Banff.</h3>
           <p>Banff National Park, CA<p/>
           <img src="/limbo/img/campsite.jpg" alt="night-distribution" width="50%">
-
-          <h3>Another great capsite even though it was crazy hot.</h3>
-          <p>Badlands National Park, South Dakota<p/>
-          <img src="/limbo/img/campsite1.jpg" alt="night-distribution" width="100%">
 
           <h3>Kepler hanging out with me while we drive through Yellowstone at 7 am.</h3>
           <p>Yellowstone National Park, Wyoming</p>
@@ -136,10 +117,6 @@
 
           <p>This was taken Siuslaw National Forest, Oregon.</p>
           <img src="/limbo/img/pic15.jpg" alt="night-distribution" width="100%">
-          <p>Horseshoe Bend, Arizona</p>
-          <img src="/limbo/img/pic2.jpg" alt="night-distribution" width="100%">
-          <p>Salt Lake City, Utah</p>
-          <img src="/limbo/img/pic3.jpg" alt="night-distribution" width="100%">
           <p>Astoria, Oregon</p>
           <img src="/limbo/img/pic4.jpg" alt="night-distribution" width="100%">
 
@@ -171,7 +148,6 @@
           <h3>Bonus Kep Shots</h3>
           <p>Teton National Park, Wyoming</p>
           <img src="/limbo/img/kep.jpg" alt="night-distribution" width="100%">
-          <img src="/limbo/img/jesse_kep.jpg" alt="night-distribution" width="100%">
         </div>
       </div>
 
